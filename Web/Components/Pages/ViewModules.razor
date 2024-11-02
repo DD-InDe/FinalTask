@@ -1,0 +1,179 @@
+@page "/ViewModules"
+@rendermode InteractiveServer
+
+<head>
+    <title>Адаптационные модули</title>
+</head>
+
+<div class="main-div">
+    <h3>Адаптационные модули</h3>
+
+    <input class="main-input"
+           type="text"
+           @oninput="ChangeSearch"
+           placeholder="Поиск"/>
+    <select @onchange="ChangeStatus"
+            class="main-input">
+        <option disabled="disabled">Фильтрация</option>
+        <option value="0">Все</option>
+        @foreach (var status in _moduleStatuses)
+        {
+            <option value="@status.Id">@status.Name</option>
+        }
+    </select>
+    <div style="display: flex; flex-direction: row">
+        <label class="main-label">Показать архив</label>
+        <input type="checkbox"
+               class="main-input"
+               checked="@_showArchive"
+               @onchange="ChangeCheck"/>
+    </div>
+
+
+    @if (_modules != null)
+    {
+        @if (_modules.Count != 0)
+        {
+            @foreach (var module in _modules)
+            {
+                <div class="list-view-div"
+                     style="background-color: @StatusColor(module)">
+                    <label>@module.Name</label>
+                    <label>@module.DateCreate</label>
+                </div>
+            }
+        }
+        else
+        {
+            <em>Данных нет</em>
+        }
+    }
+    else
+    {
+        <em>Загрузка..</em>
+    }
+</div>
+
+@code {
+    List<Module>? _modules;
+    List<ModuleStatus> _moduleStatuses = new();
+
+    int _statusId = 0;
+    string _search = string.Empty;
+    bool _showArchive = false;
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (!UserService.Authorized())
+            NavigationManager.NavigateTo("/");
+
+        try
+        {
+            await LoadData();
+            await LoadCollabData();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            await JS.InvokeVoidAsync("showNotification", "Ошибка", e.Message);
+        }
+    }
+
+    private async Task LoadCollabData()
+    {
+        try
+        {
+            List<Collaboration> collaborations = await FormationAdaptionProgram.GetEmployeeCollaborationsList(UserService.GetEmployee().Id);
+            if (_showArchive)
+                _modules = collaborations.Select(c => c.Module).ToList();
+            else
+                _modules = collaborations.Select(c => c.Module).Where(c => c.IsReleased == false).ToList();
+
+            if (_statusId != 0)
+                _modules = _modules.Where(c => c.StatusId == _statusId).ToList();
+
+            _modules = _modules.Where(c => c.Name.ToLower().Contains(_search.ToLower())).ToList();
+            
+            StateHasChanged();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
+    }
+
+    private async Task LoadData()
+    {
+        try
+        {
+            _moduleStatuses = await FormationAdaptionProgram.GetModuleStatusesList() ?? new();
+            StateHasChanged();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
+    }
+
+    private string StatusColor(Module module)
+    {
+        if ((module.DateCreate.Value.AddDays(module.ModuleDevelopDeadline.Value) - DateTime.Now).Days < 7 && module.StatusId != 3)
+            return "#e50000";
+
+        return module.StatusId switch
+        {
+            1 => "#26b050",
+            2 => "#f5fa64",
+            _ => "#808080"
+        };
+    }
+
+    #region Методы для поиска и фильтрации
+
+    private async Task ChangeCheck(ChangeEventArgs obj)
+    {
+        try
+        {
+            _showArchive = (bool)obj.Value;
+            await LoadCollabData();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            await JS.InvokeVoidAsync("showNotification", "Ошибка", e.Message);
+        }
+    }
+
+    private async Task ChangeStatus(ChangeEventArgs obj)
+    {
+        try
+        {
+            _statusId = Convert.ToInt32(obj.Value);
+            await LoadCollabData();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            await JS.InvokeVoidAsync("showNotification", "Ошибка", e.Message);
+        }
+    }
+
+    private async Task ChangeSearch(ChangeEventArgs obj)
+    {
+        try
+        {
+            _search = (string)obj.Value;
+            await LoadCollabData();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            await JS.InvokeVoidAsync("showNotification", "Ошибка", e.Message);
+        }
+    }
+
+    #endregion
+
+}

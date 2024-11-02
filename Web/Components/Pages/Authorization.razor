@@ -1,0 +1,74 @@
+﻿@page "/"
+@rendermode InteractiveServer
+
+<head>
+    <title>Вход в систему</title>
+</head>
+
+<div style="display: flex;flex-direction: column; margin: auto; align-items: center">
+    <h3>Вход в систему</h3>
+    <form method="post"
+          @formname="loginForm"
+          @onsubmit="LogIn">
+        <AntiforgeryToken/>
+
+        <div style="display: flex; flex-direction: column">
+            <input @bind="_logInModel.Login"
+                   placeholder="Логин"
+                   class="main-input"
+                   required="required"
+                   type="text"/>
+            <input @bind="_logInModel.Password"
+                   placeholder="Пароль"
+                   class="main-input"
+                   required="required"
+                   type="password"/>
+
+            <input type="submit"
+                   class="main-input"
+                   disabled="@_isSubmiting"
+                   value="Войти"/>
+        </div>
+    </form>
+
+    <label style="color: orange">@_message</label>
+</div>
+
+@code {
+    private LogInModel _logInModel = new LogInModel("", "");
+    private string _message = "";
+    private bool _isSubmiting = false;
+
+    private async Task LogIn()
+    {
+        try
+        {
+            _isSubmiting = true;
+
+            Employee? employee = await AuthorizationService.LogIn(_logInModel);
+            if (employee != null)
+            {
+                if (employee.DepartmentId == 4 || new[] { 10, 11, 12, 13, 14 }.Contains(employee.PositionId.Value))
+                {
+                    UserService.LogIn(employee);
+                    _message = String.Empty;
+                    NavigationManager.NavigateTo("PersonalArea");
+                }
+                else
+                    _message = "У вас нет доступа!";
+            }
+            else
+                _message = "Пользователь не найден";
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            await JS.InvokeVoidAsync("showNotification", "Ошибка", e.Message);
+        }
+        finally
+        {
+            _isSubmiting = false;
+        }
+    }
+
+}

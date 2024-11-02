@@ -1,0 +1,83 @@
+# curl -X 'GET' 
+#  'http://localhost:5064/api/Company/Employees' 
+#  -H 'accept: */*'
+GET http://localhost:5064/api/Company/Employees
+accept: */*
+
+###
+
+# curl -X 'POST' 
+#  'http://localhost:5064/api/Authorization/LogIn' 
+#  -H 'accept: */*' 
+#  -H 'Content-Type: application/json' 
+#  -d '{
+#  "login": "string",
+#  "password": "string"
+#}'
+POST http://localhost:5064/api/Authorization/LogIn
+accept: */*
+Content-Type: application/json
+
+{
+  "login": "kuznetsov",
+  "password": "pass567"
+}
+
+###
+
+# curl -X 'GET' 
+#  'http://localhost:5064/api/Company/Employees' 
+#  -H 'accept: */*'
+GET http://localhost:5064/api/Company/Employees
+accept: */*
+
+###
+
+# curl -X 'GET' 
+#  'http://localhost:5064/api/Company/Departments' 
+#  -H 'accept: */*'
+GET http://localhost:5064/api/Company/Departments
+accept: */*
+
+###
+
+# curl -X 'GET' 
+#  'http://localhost:5064/api/FormationProgram/Collaborations/1' 
+#  -H 'accept: */*'
+GET http://localhost:5064/api/FormationProgram/Collaborations/1
+accept: */*
+
+###
+
+# curl -X 'GET' 
+#  'http://localhost:5064/api/FormationProgram/Modules' 
+#  -H 'accept: */*'
+GET http://localhost:5064/api/FormationProgram/Modules
+accept: */*
+
+###
+
+# curl -X 'GET' 
+#  'http://localhost:5064/api/FormationProgram/ModuleStatuses' 
+#  -H 'accept: */*'
+GET http://localhost:5064/api/FormationProgram/ModuleStatuses
+accept: */*
+
+###
+
+# curl -X 'GET' 
+#  'http://localhost:5064/api/FormationProgram/Events/1' 
+#  -H 'accept: */*'
+GET http://localhost:5064/api/FormationProgram/Events/1
+accept: */*
+
+###
+
+# curl -X 'GET' 
+#  'http://localhost:5064/api/FormationProgram/Materials/1' 
+#  -H 'accept: */*'
+GET http://localhost:5064/api/FormationProgram/Materials/1
+accept: */*
+
+###
+

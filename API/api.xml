@@ -1,0 +1,113 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>API</name>
+    </assembly>
+    <members>
+        <member name="T:API.Controllers.AuthorizationController">
+            <summary>
+            Контроллер для обработки запроса авторизации
+            </summary>
+            <param name="context">Контекст базы данных</param>
+        </member>
+        <member name="M:API.Controllers.AuthorizationController.#ctor(Database.Models.EmployeeAdaptationSystemDbContext)">
+            <summary>
+            Контроллер для обработки запроса авторизации
+            </summary>
+            <param name="context">Контекст базы данных</param>
+        </member>
+        <member name="M:API.Controllers.AuthorizationController.LogIn(Database.APIModels.LogInModel)">
+            <summary>
+            Авторизация
+            </summary>
+            <param name="logInModel">
+            Модель для авторизации, содержащая в себе логин и пароль
+            </param>
+            <returns>Сотрудник</returns>
+        </member>
+        <member name="T:API.Controllers.CompanyController">
+            <summary>
+            Контроллер для управления сущностями системы.
+            Обрабатывает запросы на получение информации о различных сущностях.
+            </summary>
+            <param name="context">Контекст базы данных</param>
+        </member>
+        <member name="M:API.Controllers.CompanyController.#ctor(Database.Models.EmployeeAdaptationSystemDbContext)">
+            <summary>
+            Контроллер для управления сущностями системы.
+            Обрабатывает запросы на получение информации о различных сущностях.
+            </summary>
+            <param name="context">Контекст базы данных</param>
+        </member>
+        <member name="M:API.Controllers.CompanyController.GetEmployeesList">
+            <summary>
+            Вывод всех сотрудников
+            </summary>
+            <returns>Коллекция сотрудников</returns>
+        </member>
+        <member name="M:API.Controllers.CompanyController.GetPositionsList">
+            <summary>
+            Вывод всех должностей
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:API.Controllers.CompanyController.GetDepartmentsList">
+            <summary>
+            Вывод всех отделов
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:API.Controllers.FormationAdaptationProgramController">
+            <summary>
+            Контроллер для форматирования программ адаптации.
+            </summary>
+            <param name="context"></param>
+        </member>
+        <member name="M:API.Controllers.FormationAdaptationProgramController.#ctor(Database.Models.EmployeeAdaptationSystemDbContext)">
+            <summary>
+            Контроллер для форматирования программ адаптации.
+            </summary>
+            <param name="context"></param>
+        </member>
+        <member name="M:API.Controllers.FormationAdaptationProgramController.GetEmployeeCollaborationsList(System.Int32)">
+            <summary>
+            Метод для получения списка коллабораций в которых участвует сотрудник
+            </summary>
+            <param name="id">Идентификатор сотрудника</param>
+            <returns>Список модулей</returns>
+        </member>
+        <member name="M:API.Controllers.FormationAdaptationProgramController.GetModulesList">
+            <summary>
+            Вывод всех модулей
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:API.Controllers.FormationAdaptationProgramController.GetModuleById(System.Int32)">
+            <summary>
+            Вывод конкретного модуля
+            </summary>
+            <param name="moduleId">Идентификатор модуля</param>
+            <returns>Модуль</returns>
+        </member>
+        <member name="M:API.Controllers.FormationAdaptationProgramController.GetModuleStatusesList">
+            <summary>
+            Вывод всех статусов модуля
+            </summary>
+            <returns>Список статусов</returns>
+        </member>
+        <member name="M:API.Controllers.FormationAdaptationProgramController.GetModuleEventsList(System.Int32)">
+            <summary>
+            Вывод мероприятий конкретного модуля
+            </summary>
+            <param name="moduleId">Идентификатор модуля</param>
+            <returns></returns>
+        </member>
+        <member name="M:API.Controllers.FormationAdaptationProgramController.GetModuleMaterialList(System.Int32)">
+            <summary>
+            Вывод материалов конкркетного модуля
+            </summary>
+            <param name="moduleId">Идентификатор модуля</param>
+            <returns>Список матераилов</returns>
+        </member>
+    </members>
+</doc>
