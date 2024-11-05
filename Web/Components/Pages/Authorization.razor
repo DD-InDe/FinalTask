@@ -26,7 +26,7 @@
 
             <input type="submit"
                    class="main-input"
-                   disabled="@_isSubmiting"
+                   disabled="@_isSubmitting"
                    value="Войти"/>
         </div>
     </form>
@@ -37,13 +37,13 @@
 @code {
     private LogInModel _logInModel = new LogInModel("", "");
     private string _message = "";
-    private bool _isSubmiting = false;
+    private bool _isSubmitting = false;
 
     private async Task LogIn()
     {
         try
         {
-            _isSubmiting = true;
+            _isSubmitting = true;
 
             Employee? employee = await AuthorizationService.LogIn(_logInModel);
             if (employee != null)
@@ -52,6 +52,9 @@
                 {
                     UserService.LogIn(employee);
                     _message = String.Empty;
+
+                    await JS.InvokeVoidAsync("showNotificationByAlert", "Вы авторизоровались");
+                    
                     NavigationManager.NavigateTo("PersonalArea");
                 }
                 else
@@ -67,7 +70,7 @@
         }
         finally
         {
-            _isSubmiting = false;
+            _isSubmitting = false;
         }
     }
 

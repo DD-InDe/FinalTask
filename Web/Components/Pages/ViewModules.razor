@@ -37,6 +37,7 @@
             @foreach (var module in _modules)
             {
                 <div class="list-view-div"
+                     @onclick="() => NavigateToEdit(module.Id)"
                      style="background-color: @StatusColor(module)">
                     <label>@module.Name</label>
                     <label>@module.DateCreate</label>
@@ -83,7 +84,7 @@
     {
         try
         {
-            List<Collaboration> collaborations = await FormationAdaptionProgram.GetEmployeeCollaborationsList(UserService.GetEmployee().Id);
+            List<Collaboration> collaborations = await FormationAdaptionProgramService.GetEmployeeCollaborationsList(UserService.GetEmployee().Id);
             if (_showArchive)
                 _modules = collaborations.Select(c => c.Module).ToList();
             else
@@ -93,7 +94,7 @@
                 _modules = _modules.Where(c => c.StatusId == _statusId).ToList();
 
             _modules = _modules.Where(c => c.Name.ToLower().Contains(_search.ToLower())).ToList();
-            
+
             StateHasChanged();
         }
         catch (Exception e)
@@ -107,8 +108,7 @@
     {
         try
         {
-            _moduleStatuses = await FormationAdaptionProgram.GetModuleStatusesList() ?? new();
-            StateHasChanged();
+            _moduleStatuses = await FormationAdaptionProgramService.GetModuleStatusesList() ?? new();
         }
         catch (Exception e)
         {
@@ -176,4 +176,5 @@
 
     #endregion
 
+    private void NavigateToEdit(int id) => NavigationManager.NavigateTo($"/ModuleManagement/{id}");
 }

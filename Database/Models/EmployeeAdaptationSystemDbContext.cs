@@ -34,6 +34,8 @@ public partial class EmployeeAdaptationSystemDbContext : DbContext
 
     public virtual DbSet<ModuleAccess> ModuleAccesses { get; set; }
 
+    public virtual DbSet<ModuleEditHistory> ModuleEditHistories { get; set; }
+
     public virtual DbSet<ModuleStatus> ModuleStatuses { get; set; }
 
     public virtual DbSet<Notification> Notifications { get; set; }
@@ -151,6 +153,7 @@ public partial class EmployeeAdaptationSystemDbContext : DbContext
 
             entity.ToTable("Material");
 
+            entity.Property(e => e.FileName).HasMaxLength(200);
             entity.Property(e => e.Name).HasMaxLength(200);
 
             entity.HasOne(d => d.Module).WithMany(p => p.Materials)
@@ -167,6 +170,7 @@ public partial class EmployeeAdaptationSystemDbContext : DbContext
             entity.Property(e => e.CodeName).HasMaxLength(100);
             entity.Property(e => e.DateCreate).HasColumnType("datetime");
             entity.Property(e => e.Name).HasMaxLength(100);
+            entity.Property(e => e.Source).HasMaxLength(200);
 
             entity.HasOne(d => d.Previous).WithMany(p => p.InversePrevious)
                 .HasForeignKey(d => d.PreviousId)
@@ -194,6 +198,25 @@ public partial class EmployeeAdaptationSystemDbContext : DbContext
             entity.HasOne(d => d.Position).WithMany(p => p.ModuleAccesses)
                 .HasForeignKey(d => d.PositionId)
                 .HasConstraintName("FK__ModuleAcc__Posit__3A81B327");
+        });
+
+        modelBuilder.Entity<ModuleEditHistory>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK__ModuleEd__3214EC0733A15620");
+
+            entity.ToTable("ModuleEditHistory");
+
+            entity.Property(e => e.Datetime).HasColumnType("datetime");
+
+            entity.HasOne(d => d.Employee).WithMany(p => p.ModuleEditHistories)
+                .HasForeignKey(d => d.EmployeeId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK__ModuleEdi__Emplo__5812160E");
+
+            entity.HasOne(d => d.Module).WithMany(p => p.ModuleEditHistories)
+                .HasForeignKey(d => d.ModuleId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK__ModuleEdi__Modul__571DF1D5");
         });
 
         modelBuilder.Entity<ModuleStatus>(entity =>

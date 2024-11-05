@@ -81,3 +81,10 @@ accept: */*
 
 ###
 
+# curl -X 'GET' 
+#  'http://localhost:5064/api/FormationProgram/Modules/1' 
+#  -H 'accept: */*'
+GET http://localhost:5064/api/FormationProgram/Modules/1
+accept: */*
+
+###

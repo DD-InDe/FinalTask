@@ -14,7 +14,7 @@ public partial class TestQuestion
 
     public int? TestingId { get; set; }
 
-    [JsonIgnore] public virtual ICollection<EmployeeQuestionResult> EmployeeQuestionResults { get; set; } = new List<EmployeeQuestionResult>();
+    [JsonIgnore]  public virtual ICollection<EmployeeQuestionResult> EmployeeQuestionResults { get; set; } = new List<EmployeeQuestionResult>();
 
     public virtual Testing? Testing { get; set; }
 }

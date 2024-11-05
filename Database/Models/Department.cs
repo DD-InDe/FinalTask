@@ -10,5 +10,5 @@ public partial class Department
 
     public string? Name { get; set; }
 
-    [JsonIgnore] public virtual ICollection<Employee> Employees { get; set; } = new List<Employee>();
+    [JsonIgnore]  public virtual ICollection<Employee> Employees { get; set; } = new List<Employee>();
 }

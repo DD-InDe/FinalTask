@@ -21,6 +21,10 @@
       "PackagePath": "staticwebassets\\favicon.png"
     },
     {
+      "Id": "C:\\Users\\alena\\RiderProjects\\Projects_ForFinal\\Final_Training\\Web\\wwwroot\\scripts\\notificationByAlert.js",
+      "PackagePath": "staticwebassets\\scripts\\notificationByAlert.js"
+    },
+    {
       "Id": "C:\\Users\\alena\\RiderProjects\\Projects_ForFinal\\Final_Training\\Web\\wwwroot\\scripts\\notificationWindow.js",
       "PackagePath": "staticwebassets\\scripts\\notificationWindow.js"
     },

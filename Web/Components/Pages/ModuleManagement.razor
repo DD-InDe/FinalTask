@@ -1,21 +1,151 @@
-@page "/ModuleManagement"
+@page "/ModuleManagement/{ModuleId:int}"
+
+@rendermode InteractiveServer
 
 <head>
     <title>Форматирование модуля</title>
 </head>
 
 <div class="main-div">
-    <h3>Форматирование модуля</h3>
-    
-    
-</div>
-
-@code {
-    Module? _module;
-
-    protected override Task OnInitializedAsync()
+    <h3 style="text-align: center">Форматирование модуля</h3>
+    @if (_module != null)
     {
-        return base.OnInitializedAsync();
-    }
+        <div class="form-div">
+            <h5 style="text-align: center">Общая информация</h5>
+            <label>Название:</label>
+            <input type="text"
+                   @onchange="ChangeName"
+                   value="@_module.Name"/>
 
-}
+            <label>Доступ:</label>
+            <div style="height: 150px; resize: vertical; display: flex;flex-direction: column; overflow-y: scroll; border: black solid thin">
+                @foreach (var access in _accesses)
+                {
+                    <label>
+                        <input type="checkbox"
+                               @onchange="e => ChangeAccess(e, access)"
+                               checked="@access.IsChecked"/>
+                        @access.Position.Name
+                    </label>
+                }
+            </div>
+
+            <label>Срок прохождения в днях:</label>
+            <input type="number"
+                   value="@_module.ModuleCompleteDeadline"
+                   @onchange="ChangeDeadline"/>
+
+            <label>Ответственное лицо:</label>
+            <select value="@_module.ResponsiblePersonId"
+                    @onchange="ChangeResponsiblePerson">
+                @foreach (var employee in _employees)
+                {
+                    <option value="@employee.Id">@employee.LastName @employee.FirstName</option>
+                }
+            </select>
+
+            <label>Предыдущий модуль:</label>
+            <select value="@_module.PreviousId"
+                    @onchange="ChangePreviousModule">
+                @foreach (var module in _otherModules)
+                {
+                    <option value="@module.Id">@module.CodeName - @module.Name</option>
+                }
+            </select>
+
+            <label>Источник данных:</label>
+            <input type="text"
+                   @onchange="ChangeSource"
+                   value="@_module.Source"/>
+        </div>
+
+        <div id="events"
+             class="form-div">
+            <h5 style="text-align: center">Мероприятия</h5>
+
+            <form method="post"
+                  @formname="event-form"
+                  @onsubmit="AddEvent">
+                <AntiforgeryToken/>
+                <input type="text"
+                       style="margin: 2px"
+                       @bind="_newEvent.Name"
+                       placeholder="Название"
+                       required/>
+                <select required
+                        @bind="_newEvent.TypeId"
+                        style="margin: 2px">
+                    <option selected
+                            value="">
+                        Тип мероприятия
+                    </option>
+                    @foreach (var type in _allTypes)
+                    {
+                        <option value="@type.Id">@type.Name</option>
+                    }
+                </select>
+                <input type="text"
+                       required
+                       @bind="_newEvent.Description"
+                       style="margin: 2px"
+                       placeholder="Описание"/>
+                <input type="submit"
+                       value="Добавить"/>
+            </form>
+
+            @foreach (var eventItem in _events)
+            {
+                <div style="display: flex; flex-direction: column; border: black solid 1px">
+                    <label>Название: @eventItem.Name</label>
+                    <label>Описание: @eventItem.Description</label>
+                    <label>Тип: @eventItem.Type.Name</label>
+                </div>
+            }
+        </div>
+
+        <div id="testings"
+             style="display: grid; grid-template-columns: 1fr 1fr">
+            <div class="form-div">
+                <h5 style="text-align: center">Входное тестирование</h5>
+
+
+            </div>
+
+            <div class="form-div">
+                <h5 style="text-align: center">Итоговое тестирование</h5>
+
+            </div>
+        </div>
+
+        <div id="materials"
+             class="form-div">
+            <h5 style="text-align: center">Материалы</h5>
+
+            <form method="post"
+                  @formname="material-form"
+                  @onsubmit="AddMaterial">
+                <input type="text"
+                       required
+                       @bind="_newMaterial.Name"
+                       placeholder="Название"/>
+                <InputFile accept=".pdf, .pptx, .xlsx, .docx, .jpg, .mkv, .avi, .mp"
+                           OnChange="LoadFile">
+                </InputFile>
+                <input type="submit"
+                       value="Добавить"/>
+            </form>
+
+            @foreach (var material in _materials)
+            {
+                <label style="border: black solid 1px; margin: 5px">
+                    Название: <b>@material.Name</b>
+                    Тип: <b>@material.FileName.Split('.').Last()</b>
+                </label>
+            }
+        </div>
+    }
+    else
+    {
+        <em>Загрузка..</em>
+    }
+</div>

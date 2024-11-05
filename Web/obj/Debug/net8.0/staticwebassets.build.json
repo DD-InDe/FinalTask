@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "uPD55nHEYHftyUVSR2sectOZuNw0Ns/4DXSyHHY+Rtg=",
+  "Hash": "XVwKYGptTA52lTexqANxjbNS2xIpyQS9SIan4+81Oz4=",
   "Source": "Web",
   "BasePath": "_content/Web",
   "Mode": "Default",
@@ -129,6 +129,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\favicon.png"
+    },
+    {
+      "Identity": "C:\\Users\\alena\\RiderProjects\\Projects_ForFinal\\Final_Training\\Web\\wwwroot\\scripts\\notificationByAlert.js",
+      "SourceId": "Web",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\alena\\RiderProjects\\Projects_ForFinal\\Final_Training\\Web\\wwwroot\\",
+      "BasePath": "_content/Web",
+      "RelativePath": "scripts/notificationByAlert.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\scripts\\notificationByAlert.js"
     },
     {
       "Identity": "C:\\Users\\alena\\RiderProjects\\Projects_ForFinal\\Final_Training\\Web\\wwwroot\\scripts\\notificationWindow.js",

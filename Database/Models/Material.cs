@@ -14,5 +14,7 @@ public partial class Material
 
     public int? ModuleId { get; set; }
 
+    public string? FileName { get; set; }
+
     public virtual Module? Module { get; set; }
 }

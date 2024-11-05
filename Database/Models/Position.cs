@@ -10,7 +10,7 @@ public partial class Position
 
     public string? Name { get; set; }
 
-    [JsonIgnore] public virtual ICollection<Employee> Employees { get; set; } = new List<Employee>();
+    [JsonIgnore]  public virtual ICollection<Employee> Employees { get; set; } = new List<Employee>();
 
-    [JsonIgnore] public virtual ICollection<ModuleAccess> ModuleAccesses { get; set; } = new List<ModuleAccess>();
+    [JsonIgnore]  public virtual ICollection<ModuleAccess> ModuleAccesses { get; set; } = new List<ModuleAccess>();
 }

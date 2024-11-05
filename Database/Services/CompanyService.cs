@@ -1,3 +1,4 @@
+using System.Net.Http.Json;
 using System.Text.Json;
 using Database.Models;
 
@@ -9,7 +10,7 @@ public class CompanyService : ApiBase
     {
         try
         {
-            var message = await Client.GetAsync("api/Company/Employees");
+            var message = await Client.GetAsync(BaseUrl + "api/Company/Employees");
             if (message.IsSuccessStatusCode)
             {
                 return await JsonSerializer.DeserializeAsync<List<Employee>>(await message.Content.ReadAsStreamAsync(),
@@ -29,7 +30,7 @@ public class CompanyService : ApiBase
     {
         try
         {
-            var message = await Client.GetAsync("api/Company/Positions");
+            var message = await Client.GetAsync(BaseUrl + "api/Company/Positions");
             if (message.IsSuccessStatusCode)
             {
                 return await JsonSerializer.DeserializeAsync<List<Position>>(await message.Content.ReadAsStreamAsync(),
@@ -49,7 +50,7 @@ public class CompanyService : ApiBase
     {
         try
         {
-            var message = await Client.GetAsync("api/Company/Departments");
+            var message = await Client.GetAsync(BaseUrl + "api/Company/Departments");
             if (message.IsSuccessStatusCode)
             {
                 return await JsonSerializer.DeserializeAsync<List<Department>>(

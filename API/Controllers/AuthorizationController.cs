@@ -5,21 +5,10 @@ using Microsoft.EntityFrameworkCore;
 
 namespace API.Controllers;
 
-/// <summary>
-/// Контроллер для обработки запроса авторизации
-/// </summary>
-/// <param name="context">Контекст базы данных</param>
 [ApiController]
 [Route("api/[controller]")]
 public class AuthorizationController(EmployeeAdaptationSystemDbContext context) : ControllerBase
 {
-    /// <summary>
-    /// Авторизация
-    /// </summary>
-    /// <param name="logInModel">
-    /// Модель для авторизации, содержащая в себе логин и пароль
-    /// </param>
-    /// <returns>Сотрудник</returns>
     [HttpPost("[action]")]
     public async Task<IActionResult> LogIn([FromBody] LogInModel logInModel)
     {
