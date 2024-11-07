@@ -88,3 +88,12 @@ GET http://localhost:5064/api/FormationProgram/Modules/1
 accept: */*
 
 ###
+
+# curl -X POST http://localhost:5169/notification/send -H "Content-Type: application/json" -d "\"Ваше сообщение\""
+POST http://localhost:5169/Notification/Send
+Content-Type: application/json
+
+"Ваше сообщение"
+
+###
+

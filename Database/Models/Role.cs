@@ -10,5 +10,5 @@ public partial class Role
 
     public string? Name { get; set; }
 
-    [JsonIgnore]  public virtual ICollection<Collaboration> Collaborations { get; set; } = new List<Collaboration>();
+    [JsonIgnore] public virtual ICollection<Collaboration> Collaborations { get; set; } = new List<Collaboration>();
 }

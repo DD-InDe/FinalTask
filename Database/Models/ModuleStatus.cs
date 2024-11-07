@@ -10,5 +10,5 @@ public partial class ModuleStatus
 
     public string? Name { get; set; }
 
-    [JsonIgnore]  public virtual ICollection<Module> Modules { get; set; } = new List<Module>();
+    [JsonIgnore] public virtual ICollection<Module> Modules { get; set; } = new List<Module>();
 }

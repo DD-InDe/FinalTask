@@ -11,7 +11,8 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Services\" />
+      <_ContentIncludedByDefault Remove="Components\Modules\NotificationComponent.razor" />
+      <_ContentIncludedByDefault Remove="wwwroot\styles\notification.css" />
     </ItemGroup>
 
 </Project>

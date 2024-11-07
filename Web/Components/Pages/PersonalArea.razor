@@ -1,12 +1,33 @@
 @page "/PersonalArea"
+@using Web.Components.Modules
+@rendermode InteractiveServer
 
 <head>
     <title>Личный кабинет</title>
 </head>
-<body>
-<a href="/ViewModules">Адаптационные модули</a>
-</body>
 
-@code {
+<div style="display: flex;flex-direction: column;width: 100%">
+    <div style="display: grid; grid-template-columns: 1fr 1fr; background-color: #7c9c7c;">
+        <button @onclick="() => _selectedModule = 1"
+                style="background: #7c9c7c; margin: 10px; box-shadow: 1px 1px 5px;border: none">
+            Адаптационные модули
+        </button>
+        <button @onclick="() => _selectedModule = 2"
+                style="background: #7c9c7c; margin: 10px; box-shadow: 1px 1px 5px;border: none">
+            Согласование модулей
+        </button>
+    </div>
+    @if (_selectedModule == 1)
+    {
+        <ViewModules/>
+    }
+    else
+    {
+        <ModulesAccepting/>
+    }
+</div>
 
+@code
+{
+    private int _selectedModule = 1;
 }

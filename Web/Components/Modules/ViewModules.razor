@@ -1,0 +1,175 @@
+@rendermode InteractiveServer
+
+<div class="main-div">
+    <h3>Адаптационные модули</h3>
+
+    <input class="main-input"
+           type="text"
+           @oninput="ChangeSearch"
+           placeholder="Поиск"/>
+    <select @onchange="ChangeStatus"
+            class="main-input">
+        <option disabled="disabled">Фильтрация</option>
+        <option value="0">Все</option>
+        @foreach (var status in _moduleStatuses)
+        {
+            <option value="@status.Id">@status.Name</option>
+        }
+    </select>
+    <div style="display: flex; flex-direction: row">
+        <label class="main-label">Показать архив</label>
+        <input type="checkbox"
+               class="main-input"
+               checked="@_showArchive"
+               @onchange="ChangeCheck"/>
+    </div>
+
+
+    @if (_modules != null)
+    {
+        @if (_modules.Count != 0)
+        {
+            @foreach (var module in _modules)
+            {
+                <div class="list-view-div"
+                     @onclick="() => { if (module.StatusId == 1 || module.StatusId == 2) { NavigateToEdit(module.Id); } }"
+                     style="background-color: @StatusColor(module); color: black">
+                    <label>@module.Name</label>
+                    <label>@module.DateCreate</label>
+                </div>
+            }
+        }
+        else
+        {
+            <em>Данных нет</em>
+        }
+    }
+    else
+    {
+        <em>Загрузка..</em>
+    }
+</div>
+
+@code {
+    List<Module> _modules = new();
+    List<ModuleStatus> _moduleStatuses = new();
+    List<Employee> _employees = new();
+
+    int _statusId = 0;
+    string _search = string.Empty;
+    bool _showArchive = false;
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (!UserService.Authorized())
+            NavigationManager.NavigateTo("/");
+
+        try
+        {
+            await LoadData();
+            await LoadCollabData();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            await JS.InvokeVoidAsync("showNotification", "Ошибка", e.Message);
+        }
+    }
+
+    private async Task LoadCollabData()
+    {
+        try
+        {
+            _modules = await FormationAdaptionProgramService.GetEmployeeDevelopModules(UserService.GetEmployee().Id) ?? new();
+            if (!_showArchive)
+                _modules = _modules.Where(c => c.IsReleased == false).ToList();
+
+            if (_statusId != 0)
+                _modules = _modules.Where(c => c.StatusId == _statusId).ToList();
+
+            _modules = _modules.Where(c => c.Name.ToLower().Contains(_search.ToLower())).ToList();
+
+            StateHasChanged();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
+    }
+
+    private async Task LoadData()
+    {
+        try
+        {
+            _moduleStatuses = await FormationAdaptionProgramService.GetModuleStatusesList() ?? new();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
+    }
+
+    private string StatusColor(Module module)
+    {
+        if ((module.DateCreate.Value.AddDays(module.ModuleDevelopDeadline.Value) - DateTime.Now).Days < 7
+            && module.StatusId is 1 or 2)
+            return "#e50000";
+
+        return module.StatusId switch
+        {
+            1 => "#26b050",
+            2 => "#f5fa64",
+            _ => "white"
+        };
+    }
+
+    #region SearchAndFilter
+
+    private async Task ChangeCheck(ChangeEventArgs obj)
+    {
+        try
+        {
+            _showArchive = (bool)obj.Value;
+            await LoadCollabData();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            await JS.InvokeVoidAsync("showNotification", "Ошибка", e.Message);
+        }
+    }
+
+    private async Task ChangeStatus(ChangeEventArgs obj)
+    {
+        try
+        {
+            _statusId = Convert.ToInt32(obj.Value);
+            await LoadCollabData();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            await JS.InvokeVoidAsync("showNotification", "Ошибка", e.Message);
+        }
+    }
+
+    private async Task ChangeSearch(ChangeEventArgs obj)
+    {
+        try
+        {
+            _search = (string)obj.Value;
+            await LoadCollabData();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            await JS.InvokeVoidAsync("showNotification", "Ошибка", e.Message);
+        }
+    }
+
+    #endregion
+
+    private void NavigateToEdit(int id) => NavigationManager.NavigateTo($"/ModuleManagement/{id}");
+}

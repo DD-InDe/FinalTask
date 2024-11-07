@@ -1,0 +1,29 @@
+<Page x:Class="Desktop.Pages.LoginPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:local="clr-namespace:Desktop.Pages"
+      mc:Ignorable="d"
+      Title="Авторизация"
+      d:DesignHeight="450"
+      d:DesignWidth="800">
+
+    <StackPanel Orientation="Vertical"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Center">
+        <TextBlock Text="Логин:"
+                   Style="{StaticResource Main-Text}" />
+        <TextBox x:Name="LoginTextBox"
+                 Style="{StaticResource Main-TextBox}" />
+        <TextBlock Text="Пароль:"
+                   Style="{StaticResource Main-Text}" />
+        <PasswordBox x:Name="PasswordBox"
+                     Style="{StaticResource Main-PasswordBox}" />
+
+        <Button x:Name="LoginButton"
+                Click="LoginButton_OnClick"
+                Content="Войти"
+                Style="{StaticResource Main-Button}" />
+    </StackPanel>
+</Page>

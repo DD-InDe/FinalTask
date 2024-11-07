@@ -10,5 +10,5 @@ public partial class TestingType
 
     public string? Name { get; set; }
 
-    [JsonIgnore]  public virtual ICollection<Testing> Testings { get; set; } = new List<Testing>();
+    [JsonIgnore] public virtual ICollection<Testing> Testings { get; set; } = new List<Testing>();
 }

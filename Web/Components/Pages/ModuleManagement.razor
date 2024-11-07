@@ -1,5 +1,4 @@
 @page "/ModuleManagement/{ModuleId:int}"
-
 @rendermode InteractiveServer
 
 <head>
@@ -10,6 +9,8 @@
     <h3 style="text-align: center">Форматирование модуля</h3>
     @if (_module != null)
     {
+        #region ModuleInfo
+
         <div class="form-div">
             <h5 style="text-align: center">Общая информация</h5>
             <label>Название:</label>
@@ -58,6 +59,12 @@
                    @onchange="ChangeSource"
                    value="@_module.Source"/>
         </div>
+        
+        <button @onclick="SendModule" style="background-color: lightcoral">Отправить на согласование</button>
+
+        #endregion
+
+        #region Events
 
         <div id="events"
              class="form-div">
@@ -103,19 +110,73 @@
             }
         </div>
 
+        #endregion
+
+        #region Testings
+
         <div id="testings"
              style="display: grid; grid-template-columns: 1fr 1fr">
+
             <div class="form-div">
                 <h5 style="text-align: center">Входное тестирование</h5>
 
+                <form method="post"
+                      @onsubmit="async () => await AddQuestion(_entranceQuestion,1)"
+                      @formname="entrance-form">
+                    <AntiforgeryToken/>
+                    <input type="text"
+                           required
+                           placeholder="Вопрос"
+                           @bind="_entranceQuestion.Question"/>
+                    <input type="text"
+                           required
+                           placeholder="Ответ"
+                           @bind="_entranceQuestion.Answer"/>
+                    <input type="submit"
+                           value="Добавить"/>
+                </form>
 
+                @foreach (var question in _questions.Where(c => c.Testing.TypeId == 1).ToList())
+                {
+                    <div style="display: flex; flex-direction: column; border: black solid 1px">
+                        <label>Вопрос: @question.Question</label>
+                        <label>Ответ: @question.Answer</label>
+                    </div>
+                }
             </div>
 
             <div class="form-div">
                 <h5 style="text-align: center">Итоговое тестирование</h5>
 
+                <form method="post"
+                      @onsubmit="async () => await AddQuestion(_finalQuestion,2)"
+                      @formname="final-form">
+                    <AntiforgeryToken/>
+                    <input type="text"
+                           required
+                           placeholder="Вопрос"
+                           @bind="_finalQuestion.Question"/>
+                    <input type="text"
+                           required
+                           placeholder="Ответ"
+                           @bind="_finalQuestion.Answer"/>
+                    <input type="submit"
+                           value="Добавить"/>
+                </form>
+
+                @foreach (var question in _questions.Where(c => c.Testing.TypeId == 2).ToList())
+                {
+                    <div style="display: flex; flex-direction: column; border: black solid 1px">
+                        <label>Вопрос: @question.Question</label>
+                        <label>Ответ: @question.Answer</label>
+                    </div>
+                }
             </div>
         </div>
+
+        #endregion
+
+        #region Materials
 
         <div id="materials"
              class="form-div">
@@ -143,6 +204,8 @@
                 </label>
             }
         </div>
+
+        #endregion
     }
     else
     {

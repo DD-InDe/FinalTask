@@ -26,19 +26,19 @@ public partial class Module
 
     public int? ResponsiblePersonId { get; set; }
 
-    public string? Source { get; set; } = null!;
+    public string? Source { get; set; }
 
-    [JsonIgnore]  public virtual ICollection<Collaboration> Collaborations { get; set; } = new List<Collaboration>();
+    [JsonIgnore] public virtual ICollection<Collaboration> Collaborations { get; set; } = new List<Collaboration>();
 
-    [JsonIgnore]  public virtual ICollection<Event> Events { get; set; } = new List<Event>();
+    [JsonIgnore] public virtual ICollection<Event> Events { get; set; } = new List<Event>();
 
-    [JsonIgnore]  public virtual ICollection<Module> InversePrevious { get; set; } = new List<Module>();
+    [JsonIgnore] public virtual ICollection<Module> InversePrevious { get; set; } = new List<Module>();
 
-    [JsonIgnore]  public virtual ICollection<Material> Materials { get; set; } = new List<Material>();
+    [JsonIgnore] public virtual ICollection<Material> Materials { get; set; } = new List<Material>();
 
-    [JsonIgnore]  public virtual ICollection<ModuleAccess> ModuleAccesses { get; set; } = new List<ModuleAccess>();
+    [JsonIgnore] public virtual ICollection<ModuleAccess> ModuleAccesses { get; set; } = new List<ModuleAccess>();
 
-    [JsonIgnore]  public virtual ICollection<ModuleEditHistory> ModuleEditHistories { get; set; } = new List<ModuleEditHistory>();
+    [JsonIgnore] public virtual ICollection<ModuleEditHistory> ModuleEditHistories { get; set; } = new List<ModuleEditHistory>();
 
     public virtual Module? Previous { get; set; }
 
@@ -46,5 +46,5 @@ public partial class Module
 
     public virtual ModuleStatus? Status { get; set; }
 
-    [JsonIgnore]  public virtual ICollection<Testing> Testings { get; set; } = new List<Testing>();
+    [JsonIgnore] public virtual ICollection<Testing> Testings { get; set; } = new List<Testing>();
 }

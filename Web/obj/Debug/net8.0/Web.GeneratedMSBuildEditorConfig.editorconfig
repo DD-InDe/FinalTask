@@ -22,6 +22,14 @@ build_property._RazorSourceGeneratorDebug =
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xBcHAucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/alena/RiderProjects/Projects_ForFinal/Final_Training/Web/Components/Modules/ModulesAccepting.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xNb2R1bGVzXE1vZHVsZXNBY2NlcHRpbmcucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/alena/RiderProjects/Projects_ForFinal/Final_Training/Web/Components/Modules/ViewModules.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xNb2R1bGVzXFZpZXdNb2R1bGVzLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/alena/RiderProjects/Projects_ForFinal/Final_Training/Web/Components/Pages/Authorization.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xBdXRob3JpemF0aW9uLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
@@ -34,8 +42,8 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xQZXJzb25hbEFyZWEucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/alena/RiderProjects/Projects_ForFinal/Final_Training/Web/Components/Pages/ViewModules.razor]
-build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xWaWV3TW9kdWxlcy5yYXpvcg==
+[C:/Users/alena/RiderProjects/Projects_ForFinal/Final_Training/Web/Components/Pages/ViewModuleInfo.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xWaWV3TW9kdWxlSW5mby5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/alena/RiderProjects/Projects_ForFinal/Final_Training/Web/Components/Routes.razor]

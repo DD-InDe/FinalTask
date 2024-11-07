@@ -10,5 +10,5 @@ public partial class EventType
 
     public string? Name { get; set; }
 
-    [JsonIgnore]  public virtual ICollection<Event> Events { get; set; } = new List<Event>();
+    [JsonIgnore] public virtual ICollection<Event> Events { get; set; } = new List<Event>();
 }

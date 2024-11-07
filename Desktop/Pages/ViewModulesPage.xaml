@@ -1,0 +1,65 @@
+<Page x:Class="Desktop.Pages.ViewModulesPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:local="clr-namespace:Desktop.Pages"
+      mc:Ignorable="d"
+      Initialized="ViewModulesPage_OnInitialized"
+      Title="Адаптационные модули"
+      d:DesignHeight="450"
+      d:DesignWidth="800">
+
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <!-- FilterAndAction -->
+        <Border Style="{StaticResource Sample-Border}">
+            <StackPanel Orientation="Vertical">
+                <TextBlock Text="Должность:"
+                           Style="{StaticResource Main-Text}" />
+                <ComboBox x:Name="PositionComboBox"
+                          SelectionChanged="PositionComboBox_OnSelectionChanged"
+                          DisplayMemberPath="Name"
+                          Style="{StaticResource Main-ComboBox}" />
+                <Button x:Name="AddNewButton"
+                        Click="AddNewButton_OnClick"
+                        Style="{StaticResource Main-Button}"
+                        HorizontalAlignment="Left"
+                        Content="Создать задание" />
+            </StackPanel>
+        </Border>
+
+        <!-- ViewData -->
+        <Border Grid.Row="1"
+                Style="{StaticResource Sample-Border}">
+            <DataGrid x:Name="ModulesDataGrid"
+                      AutoGenerateColumns="False"
+                      IsReadOnly="True">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Width="*"
+                                        Header="Название"
+                                        Binding="{Binding Module.Name}" />
+                    <DataGridTemplateColumn Header="Должности"
+                                            Width="*">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <ItemsControl ItemsSource="{Binding Positions}">
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding Name}" />
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Border>
+    </Grid>
+</Page>

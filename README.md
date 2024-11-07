@@ -1,4 +1,4 @@
-# Employee Adaptation System
+Employee Adaptation System
 
 - - -
 
@@ -13,5 +13,6 @@
 | System.Drawing.Common                   |            |            |
 | Aspose.Words                            |            |            |
 | Aspose.Cells                            |            |            |
+| Extended.Wpf.Toolkit                    |            |            |
 
 - - -

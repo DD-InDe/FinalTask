@@ -16,6 +16,8 @@ public partial class Collaboration
 
     public int? RoleId { get; set; }
 
+    public bool? IsAccepted { get; set; }
+
     public virtual Employee? Employee { get; set; }
 
     public virtual Module? Module { get; set; }

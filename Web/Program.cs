@@ -1,3 +1,5 @@
+using Microsoft.AspNetCore.ResponseCompression;
+using Microsoft.JSInterop;
 using Web.Components;
 using Web.Services;
 
@@ -6,6 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
+builder.Services.AddControllers();
 builder.Services.AddSingleton<UserService>();
 
 var app = builder.Build();
@@ -23,6 +26,7 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseAntiforgery();
 
+app.MapControllers();
 app.MapRazorComponents<App>()
     .AddInteractiveServerRenderMode();
 

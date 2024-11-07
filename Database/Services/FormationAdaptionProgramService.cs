@@ -8,27 +8,6 @@ public abstract class FormationAdaptionProgramService : ApiBase
 {
     #region Other
 
-    public static async Task<List<Collaboration>?> GetEmployeeCollaborationsList(int id)
-    {
-        try
-        {
-            var message = await Client.GetAsync(BaseUrl + $"api/FormationProgram/Collaborations/{id}");
-            if (message.IsSuccessStatusCode)
-            {
-                return await JsonSerializer.DeserializeAsync<List<Collaboration>>(
-                    await message.Content.ReadAsStreamAsync(),
-                    Options);
-            }
-
-            return null;
-        }
-        catch (Exception e)
-        {
-            Console.WriteLine(e);
-            throw;
-        }
-    }
-
     public static async Task<List<ModuleStatus>?> GetModuleStatusesList()
     {
         try
@@ -54,8 +33,125 @@ public abstract class FormationAdaptionProgramService : ApiBase
     {
         try
         {
-            var message = await Client.PostAsJsonAsync(BaseUrl + $"api/FormationProgram/ModuleHistory",history);
+            var message = await Client.PostAsJsonAsync(BaseUrl + $"api/FormationProgram/ModuleHistory", history);
             Console.WriteLine(await message.Content.ReadAsStringAsync());
+            return message.IsSuccessStatusCode;
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
+    }
+
+    #endregion
+
+    #region Collaborations
+
+    public static async Task<List<Module>?> GetEmployeeDevelopModules(int employeeId)
+    {
+        try
+        {
+            var message = await Client.GetAsync(BaseUrl + $"api/FormationProgram/EmployeeDevelopModules/{employeeId}");
+            if (message.IsSuccessStatusCode)
+            {
+                return await JsonSerializer.DeserializeAsync<List<Module>>(
+                    await message.Content.ReadAsStreamAsync(),
+                    Options);
+            }
+
+            return null;
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
+    }
+
+    public static async Task<List<Module>?> GetEmployeeAccessModules(int employeeId)
+    {
+        try
+        {
+            var message = await Client.GetAsync(BaseUrl + $"api/FormationProgram/EmployeeAccessModules/{employeeId}");
+            if (message.IsSuccessStatusCode)
+            {
+                return await JsonSerializer.DeserializeAsync<List<Module>>(
+                    await message.Content.ReadAsStreamAsync(),
+                    Options);
+            }
+
+            return null;
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
+    }
+
+    public static async Task<List<Collaboration>?> GetCollaborations()
+    {
+        try
+        {
+            var message = await Client.GetAsync(BaseUrl + $"api/FormationProgram/Collaborations");
+            if (message.IsSuccessStatusCode)
+            {
+                return await JsonSerializer.DeserializeAsync<List<Collaboration>>(
+                    await message.Content.ReadAsStreamAsync(),
+                    Options);
+            }
+
+            return null;
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
+    }
+
+    public static async Task<List<Collaboration>?> GetModuleDevelopers(int moduleId)
+    {
+        try
+        {
+            var message = await Client.GetAsync(BaseUrl + $"api/FormationProgram/ModuleDevelopers/{moduleId}");
+            if (message.IsSuccessStatusCode)
+            {
+                return await JsonSerializer.DeserializeAsync<List<Collaboration>>(
+                    await message.Content.ReadAsStreamAsync(),
+                    Options);
+            }
+
+            return null;
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
+    }
+
+    public static async Task<bool> RejectModule(int moduleId)
+    {
+        try
+        {
+            var message = await Client.PostAsync(BaseUrl + $"api/FormationProgram/RejectModule", null);
+            return message.IsSuccessStatusCode;
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
+    }
+
+    public static async Task<bool> AcceptModule(int moduleId, int employeeId)
+    {
+        try
+        {
+            var message = await Client.PostAsync(BaseUrl + $"api/FormationProgram/AcceptModule/{moduleId},{employeeId}",
+                null);
             return message.IsSuccessStatusCode;
         }
         catch (Exception e)
@@ -108,12 +204,13 @@ public abstract class FormationAdaptionProgramService : ApiBase
             throw;
         }
     }
-    
+
     public static async Task<bool?> UpdateModule(Module module)
     {
         try
         {
-            var message = await Client.PutAsJsonAsync(BaseUrl + $"api/FormationProgram/Modules",module);
+            module.Status = null;
+            var message = await Client.PutAsJsonAsync(BaseUrl + $"api/FormationProgram/Modules", module);
             return message.IsSuccessStatusCode;
         }
         catch (Exception e)
@@ -146,12 +243,13 @@ public abstract class FormationAdaptionProgramService : ApiBase
             throw;
         }
     }
-    
-    public static async Task<bool> IncludePositionsInModule(int moduleId,List<Position> positions)
+
+    public static async Task<bool> IncludePositionsInModule(int moduleId, List<Position> positions)
     {
         try
         {
-            var message = await Client.PostAsJsonAsync(BaseUrl + $"api/FormationProgram/Positions/{moduleId}",positions);
+            var message =
+                await Client.PostAsJsonAsync(BaseUrl + $"api/FormationProgram/Positions/{moduleId}", positions);
             return message.IsSuccessStatusCode;
         }
         catch (Exception e)
@@ -162,7 +260,7 @@ public abstract class FormationAdaptionProgramService : ApiBase
     }
 
     #endregion
-    
+
     #region Events
 
     public static async Task<List<Event>?> GetModuleEvents(int moduleId)
@@ -261,11 +359,11 @@ public abstract class FormationAdaptionProgramService : ApiBase
 
     #region Questions
 
-    public static async Task<List<TestQuestion>?> GetModuleEntranceQuestions(int moduleId)
+    public static async Task<List<TestQuestion>?> GetModuleQuestions(int moduleId)
     {
         try
         {
-            var message = await Client.GetAsync(BaseUrl + $"api/FormationProgram/EntranceQuestions/{moduleId}");
+            var message = await Client.GetAsync(BaseUrl + $"api/FormationProgram/Questions/{moduleId}");
             if (message.IsSuccessStatusCode)
             {
                 return await JsonSerializer.DeserializeAsync<List<TestQuestion>>(
@@ -282,47 +380,11 @@ public abstract class FormationAdaptionProgramService : ApiBase
         }
     }
 
-    public static async Task<bool> AddModuleEntranceQuestions(int moduleId, TestQuestion question)
+    public static async Task<bool> AddModuleQuestion(int moduleId, int typeId, TestQuestion question)
     {
         try
         {
-            var message = await Client.PostAsJsonAsync(BaseUrl + $"api/FormationProgram/EntranceQuestions/{moduleId}",
-                question);
-            return message.IsSuccessStatusCode;
-        }
-        catch (Exception e)
-        {
-            Console.WriteLine(e);
-            throw;
-        }
-    }
-
-    public static async Task<List<TestQuestion>?> GetModuleFinalQuestions(int moduleId)
-    {
-        try
-        {
-            var message = await Client.GetAsync(BaseUrl + $"api/FormationProgram/FinalQuestions/{moduleId}");
-            if (message.IsSuccessStatusCode)
-            {
-                return await JsonSerializer.DeserializeAsync<List<TestQuestion>>(
-                    await message.Content.ReadAsStreamAsync(),
-                    Options);
-            }
-
-            return null;
-        }
-        catch (Exception e)
-        {
-            Console.WriteLine(e);
-            throw;
-        }
-    }
-
-    public static async Task<bool> AddModuleFinalQuestions(int moduleId, TestQuestion question)
-    {
-        try
-        {
-            var message = await Client.PostAsJsonAsync(BaseUrl + $"api/FormationProgram/FinalQuestions/{moduleId}",
+            var message = await Client.PostAsJsonAsync(BaseUrl + $"api/FormationProgram/Questions/{typeId},{moduleId}",
                 question);
             return message.IsSuccessStatusCode;
         }

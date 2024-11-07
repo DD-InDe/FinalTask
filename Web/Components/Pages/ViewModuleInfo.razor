@@ -1,0 +1,120 @@
+@page "/ViewModuleInfo/{ModuleId:int}"
+@rendermode InteractiveServer
+
+<head>
+    <title>Подробная информация</title>
+</head>
+
+<div class="main-div">
+    <h3 style="text-align: center">Подробная информация</h3>
+    @if (_module != null)
+    {
+        <div class="form-div">
+            <h5 style="text-align: center">Общая информация</h5>
+
+            <label>Название: @_module.Name</label>
+            <label>Кодовое название: @_module.CodeName</label>
+            <label>Дата создания: @_module.DateCreate.Value.ToString("d")</label>
+            <label>Срок разработки: @_module.ModuleDevelopDeadline дней</label>
+            <label>Срок прохождения: @_module.ModuleCompleteDeadline дней</label>
+            <label>Источник данных: @_module.Source</label>
+            <label>Ответственное лицо: @_module.ResponsiblePerson.LastName @_module.ResponsiblePerson.FirstName</label>
+            <label>Доступ:</label>
+            <ul>
+                @foreach (var position in _positions)
+                {
+                    <li>@position.Name</li>
+                }
+            </ul>
+            <label>Разработчики:</label>
+            <ul>
+                @foreach (var developer in _developers)
+                {
+                <li>@developer.LastName @developer.FirstName</li>
+                }
+            </ul>
+        </div>
+
+        <div class="form-div">
+            <h5 style="text-align: center">Мероприятия</h5>
+
+            @foreach (var eventItem in _events)
+            {
+                <div style="display: flex; flex-direction: column; border: black solid 1px">
+                    <label>Название: @eventItem.Name</label>
+                    <label>Описание: @eventItem.Description</label>
+                    <label>Тип: @eventItem.Type.Name</label>
+                </div>
+            }
+        </div>
+
+        <div class="form-div">
+            <h5 style="text-align: center">Материалы</h5>
+
+            @foreach (var material in _materials)
+            {
+                <label style="border: black solid 1px; margin: 5px">
+                    Название: <b>@material.Name</b>
+                    Тип: <b>@material.FileName.Split('.').Last()</b>
+                </label>
+            }
+        </div>
+
+        <div id="testings"
+             style="display: grid; grid-template-columns: 1fr 1fr">
+
+            <div class="form-div">
+                <h5 style="text-align: center">Входное тестирование</h5>
+
+                @foreach (var question in _questions.Where(c => c.Testing.TypeId == 1)
+                              .ToList())
+                {
+                    <div style="display: flex; flex-direction: column; border: black solid 1px">
+                        <label>Вопрос: @question.Question</label>
+                        <label>Ответ: @question.Answer</label>
+                    </div>
+                }
+            </div>
+
+            <div class="form-div">
+                <h5 style="text-align: center">Итоговое тестирование</h5>
+
+                @foreach (var question in _questions.Where(c => c.Testing.TypeId == 2)
+                              .ToList())
+                {
+                    <div style="display: flex; flex-direction: column; border: black solid 1px">
+                        <label>Вопрос: @question.Question</label>
+                        <label>Ответ: @question.Answer</label>
+                    </div>
+                }
+            </div>
+
+            <div class="form-div">
+                <h5 style="text-align: center">Вердикт</h5>
+                
+                <form method="post"
+                      @onsubmit="Reject"
+                      @formname="accept-form">
+                    <AntiforgeryToken/>
+
+                    <input @bind="Why"
+                           required
+                           type="text"
+                           placeholder="Причина"/>
+                    <input @bind="Days"
+                           required
+                           type="number"
+                           placeholder="Срок (в днях)"/>
+                    <input type="submit"
+                           value="Отклонить"/>
+                </form>
+
+                <button @onclick="Accept">Согласовать</button>
+            </div>
+        </div>
+    }
+    else
+    {
+        <em>Загрузка..</em>
+    }
+</div>

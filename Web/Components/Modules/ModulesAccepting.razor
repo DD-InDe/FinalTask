@@ -1,0 +1,123 @@
+@rendermode InteractiveServer
+
+<div class="main-div">
+    <h3>Согласование модулей</h3>
+
+    <input class="main-input"
+           type="text"
+           @oninput="ChangeSearch"
+           placeholder="Поиск"/>
+
+    @if (_accessModules != null)
+    {
+        @if (_accessModules.Count != 0)
+        {
+            @foreach (var module in _accessModules)
+            {
+                <div class="list-view-div"
+                     @onclick="() => NavigateToView(module.Id)"
+                     style="background-color: @StatusColor(module); color: black">
+                    <label>@module.Name</label>
+                    <label>@module.DateCreate</label>
+
+                    Разработчики:
+                    <div style="display: grid; grid-template-columns: repeat(3,1fr)">
+                        @foreach (var employee in _collaborations.Where(c => c.ModuleId == module.Id)
+                                      .ToList()
+                                      .Select(c => c.Employee))
+                        {
+                            <label>@employee.LastName @employee.FirstName</label>
+                        }
+                    </div>
+                </div>
+            }
+        }
+        else
+        {
+            <em>Данных нет</em>
+        }
+    }
+    else
+    {
+        <em>Загрузка..</em>
+    }
+</div>
+
+@code {
+    List<Module> _accessModules = new();
+    List<Collaboration> _collaborations = new();
+
+    private string _search = string.Empty;
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (!UserService.Authorized())
+            NavigationManager.NavigateTo("/");
+
+        try
+        {
+            await LoadCollabData();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            await JS.InvokeVoidAsync("showNotification", "Ошибка", e.Message);
+        }
+    }
+
+    private async Task LoadCollabData()
+    {
+        try
+        {
+            _accessModules = await FormationAdaptionProgramService.GetEmployeeAccessModules(UserService.GetEmployee()
+                .Id);
+
+            _accessModules = _accessModules.Where(c => c.Name.ToLower()
+                    .Contains(_search.ToLower()))
+                .ToList();
+
+            foreach (var module in _accessModules)
+                _collaborations.AddRange(await FormationAdaptionProgramService.GetModuleDevelopers(module.Id));
+
+            StateHasChanged();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
+    }
+
+    private string StatusColor(Module module)
+    {
+        if ((module.DateCreate.Value.AddDays(module.ModuleDevelopDeadline.Value) - DateTime.Now).Days < 7 && module.StatusId != 3)
+            return "#e50000";
+
+        return module.StatusId switch
+        {
+            1 => "#26b050",
+            2 => "#f5fa64",
+            _ => "#808080"
+        };
+    }
+
+    #region Search
+
+    private async Task ChangeSearch(ChangeEventArgs obj)
+    {
+        try
+        {
+            _search = (string)obj.Value;
+            await LoadCollabData();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            await JS.InvokeVoidAsync("showNotification", "Ошибка", e.Message);
+        }
+    }
+
+    #endregion
+
+    private void NavigateToView(int id) => NavigationManager.NavigateTo($"/ViewModuleInfo/{id}");
+}

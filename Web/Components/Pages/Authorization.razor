@@ -53,8 +53,6 @@
                     UserService.LogIn(employee);
                     _message = String.Empty;
 
-                    await JS.InvokeVoidAsync("showNotificationByAlert", "Вы авторизоровались");
-                    
                     NavigationManager.NavigateTo("PersonalArea");
                 }
                 else

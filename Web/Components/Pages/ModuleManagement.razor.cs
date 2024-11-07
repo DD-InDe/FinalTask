@@ -3,6 +3,7 @@ using Database.Services;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.JSInterop;
+using Web.Services;
 
 namespace Web.Components.Pages;
 
@@ -24,13 +25,14 @@ public partial class ModuleManagement : ComponentBase
     private List<Event> _events = new();
     private List<Material> _materials = new();
 
-    private List<TestQuestion> _entranceQuestions = new();
-    private List<TestQuestion> _finalQuestions = new();
+    private List<TestQuestion> _questions = new();
 
     Exception? _exception;
 
-    Event _newEvent = new Event();
-    Material _newMaterial = new Material();
+    private Event _newEvent = new();
+    private Material _newMaterial = new();
+    private TestQuestion _entranceQuestion = new();
+    private TestQuestion _finalQuestion = new();
 
     #endregion
 
@@ -52,6 +54,12 @@ public partial class ModuleManagement : ComponentBase
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
+        if (_module != null)
+        {
+            if (_module.StatusId == 3 || _module.StatusId == 4)
+                NavigationManager.NavigateTo("/PersonalArea");
+        }
+
         if (_exception != null)
             await JS.InvokeVoidAsync("showNotificationByAlert", $"Приозошла ошибка: {_exception.Message}");
 
@@ -81,8 +89,7 @@ public partial class ModuleManagement : ComponentBase
 
             _events = await FormationAdaptionProgramService.GetModuleEvents(ModuleId) ?? new();
             _materials = await FormationAdaptionProgramService.GetModuleMaterials(ModuleId) ?? new();
-            _entranceQuestions = await FormationAdaptionProgramService.GetModuleEntranceQuestions(ModuleId) ?? new();
-            _finalQuestions = await FormationAdaptionProgramService.GetModuleFinalQuestions(ModuleId) ?? new();
+            _questions = await FormationAdaptionProgramService.GetModuleQuestions(ModuleId) ?? new();
         }
         catch (Exception e)
         {
@@ -206,7 +213,7 @@ public partial class ModuleManagement : ComponentBase
     {
         await ChangeValue(obj, value => _module.Source = value);
     }
-    
+
     private async Task ChangeDeadline(ChangeEventArgs obj)
     {
         await ChangeValue(obj, value => _module.ModuleCompleteDeadline = int.Parse(value));
@@ -222,12 +229,51 @@ public partial class ModuleManagement : ComponentBase
         await ChangeValue(obj, value => _module.ResponsiblePersonId = int.Parse(value));
     }
 
+    private async Task AddQuestion(TestQuestion question, int type)
+    {
+        try
+        {
+            await FormationAdaptionProgramService.AddModuleQuestion(ModuleId, type, question);
+
+            _entranceQuestion = new();
+            _finalQuestion = new();
+
+            await AddHistory();
+            await LoadAllData();
+
+            StateHasChanged();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
+    }
+
+    private async Task SendModule()
+    {
+        try
+        {
+            _module.StatusId = 3;
+            await FormationAdaptionProgramService.UpdateModule(_module);
+            NavigationManager.NavigateTo("/PersonalArea");
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
+    }
+
     private async Task AddHistory()
     {
         try
         {
+            _module.StatusId = 2;
+            await FormationAdaptionProgramService.UpdateModule(_module);
+            
             await FormationAdaptionProgramService.AddModuleHistory(
-                new() { ModuleId = ModuleId, EmployeeId = UserService.GetEmployee().Id, Datetime = DateTime.Now });
+                new() { Module = _module, Employee = UserService.GetEmployee(), Datetime = DateTime.Now });
         }
         catch (Exception e)
         {
