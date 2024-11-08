@@ -1,5 +1,6 @@
 using Database.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace API.Controllers;
 
@@ -20,6 +21,23 @@ public class AdaptationManageController(EmployeeAdaptationSystemDbContext contex
             await context.SaveChangesAsync();
 
             return Ok();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            return Conflict(e);
+        }
+    }
+
+    [HttpGet("Modules/positionId={positionId:int}")]
+    public async Task<IActionResult> GetModulesByPosition(int positionId)
+    {
+        try
+        {
+            return Ok(await context
+                .ModuleAccesses.Where(c => c.PositionId == positionId)
+                .Select(c => c.Module)
+                .ToListAsync());
         }
         catch (Exception e)
         {
