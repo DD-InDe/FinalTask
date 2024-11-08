@@ -22,6 +22,10 @@ public partial class Employee
 
     public int? PositionId { get; set; }
 
+    [JsonIgnore] public virtual ICollection<AdaptationProgramModule> AdaptationProgramModules { get; set; } = new List<AdaptationProgramModule>();
+
+    [JsonIgnore] public virtual ICollection<AdaptationProgram> AdaptationPrograms { get; set; } = new List<AdaptationProgram>();
+
     [JsonIgnore] public virtual ICollection<Collaboration> Collaborations { get; set; } = new List<Collaboration>();
 
     public virtual Department? Department { get; set; }

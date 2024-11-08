@@ -28,6 +28,8 @@ public partial class Module
 
     public string? Source { get; set; }
 
+    [JsonIgnore] public virtual ICollection<AdaptationProgramModule> AdaptationProgramModules { get; set; } = new List<AdaptationProgramModule>();
+
     [JsonIgnore] public virtual ICollection<Collaboration> Collaborations { get; set; } = new List<Collaboration>();
 
     [JsonIgnore] public virtual ICollection<Event> Events { get; set; } = new List<Event>();

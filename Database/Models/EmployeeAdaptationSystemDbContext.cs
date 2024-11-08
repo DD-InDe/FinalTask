@@ -16,6 +16,10 @@ public partial class EmployeeAdaptationSystemDbContext : DbContext
     {
     }
 
+    public virtual DbSet<AdaptationProgram> AdaptationPrograms { get; set; }
+
+    public virtual DbSet<AdaptationProgramModule> AdaptationProgramModules { get; set; }
+
     public virtual DbSet<Collaboration> Collaborations { get; set; }
 
     public virtual DbSet<Department> Departments { get; set; }
@@ -56,6 +60,46 @@ public partial class EmployeeAdaptationSystemDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.Entity<AdaptationProgram>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK__Adaptati__3214EC07F9A9E23A");
+
+            entity.ToTable("AdaptationProgram");
+
+            entity.Property(e => e.DateStart).HasColumnType("datetime");
+
+            entity.HasOne(d => d.Department).WithMany(p => p.AdaptationPrograms)
+                .HasForeignKey(d => d.DepartmentId)
+                .HasConstraintName("FK__Adaptatio__Depar__5DCAEF64");
+
+            entity.HasOne(d => d.Employee).WithMany(p => p.AdaptationPrograms)
+                .HasForeignKey(d => d.EmployeeId)
+                .HasConstraintName("FK__Adaptatio__Emplo__5CD6CB2B");
+
+            entity.HasOne(d => d.Position).WithMany(p => p.AdaptationPrograms)
+                .HasForeignKey(d => d.PositionId)
+                .HasConstraintName("FK__Adaptatio__Posit__5EBF139D");
+        });
+
+        modelBuilder.Entity<AdaptationProgramModule>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK__Adaptati__3214EC07D56D8A23");
+
+            entity.ToTable("AdaptationProgramModule");
+
+            entity.HasOne(d => d.AdaptationProgram).WithMany(p => p.AdaptationProgramModules)
+                .HasForeignKey(d => d.AdaptationProgramId)
+                .HasConstraintName("FK__Adaptatio__Adapt__619B8048");
+
+            entity.HasOne(d => d.Mentor).WithMany(p => p.AdaptationProgramModules)
+                .HasForeignKey(d => d.MentorId)
+                .HasConstraintName("FK__Adaptatio__Mento__6383C8BA");
+
+            entity.HasOne(d => d.Module).WithMany(p => p.AdaptationProgramModules)
+                .HasForeignKey(d => d.ModuleId)
+                .HasConstraintName("FK__Adaptatio__Modul__628FA481");
+        });
+
         modelBuilder.Entity<Collaboration>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("PK__Collabor__3214EC079529E7F7");

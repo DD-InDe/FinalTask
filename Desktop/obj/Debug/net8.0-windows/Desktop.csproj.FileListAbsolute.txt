@@ -208,3 +208,5 @@ C:\Users\alena\RiderProjects\Projects_ForFinal\FinalTask\Desktop\obj\Debug\net8.
 C:\Users\alena\RiderProjects\Projects_ForFinal\FinalTask\Desktop\obj\Debug\net8.0-windows\Desktop.pdb
 C:\Users\alena\RiderProjects\Projects_ForFinal\FinalTask\Desktop\obj\Debug\net8.0-windows\Desktop.genruntimeconfig.cache
 C:\Users\alena\RiderProjects\Projects_ForFinal\FinalTask\Desktop\obj\Debug\net8.0-windows\ref\Desktop.dll
+C:\Users\alena\RiderProjects\Projects_ForFinal\FinalTask\Desktop\obj\Debug\net8.0-windows\Pages\ConstructorPage.g.cs
+C:\Users\alena\RiderProjects\Projects_ForFinal\FinalTask\Desktop\obj\Debug\net8.0-windows\Pages\ConstructorPage.baml

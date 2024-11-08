@@ -92,7 +92,9 @@
             <Setter Property="MinWidth"
                     Value="150" />
             <Setter Property="Background"
-                    Value="DarkSeaGreen" />
+                    Value="MediumSeaGreen" />
+            <Setter Property="Foreground"
+                    Value="White" />
         </Style>
 
         <Style TargetType="Border"

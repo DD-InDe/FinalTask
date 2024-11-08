@@ -12,7 +12,7 @@ public partial class AddModulePage : Page
 {
     private List<Employee> _allEmployees = new();
 
-    private Module _module = new Module()
+    private Module _module = new ()
     {
         DateCreate = DateTime.Now,
         StatusId = 1,

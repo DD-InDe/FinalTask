@@ -13,13 +13,10 @@ public partial class MainMenuPage : Page
     private void ModulesButton_OnClick(object sender, RoutedEventArgs e) =>
         NavigationService.Navigate(new ViewModulesPage());
 
-    private void ConstructorButton_OnClick(object sender, RoutedEventArgs e)
-    {
-        throw new NotImplementedException();
-    }
+    private void ConstructorButton_OnClick(object sender, RoutedEventArgs e) =>
+        NavigationService.Navigate(new ConstructorPage());
 
     private void AnalyzeButton_OnClick(object sender, RoutedEventArgs e)
     {
-        throw new NotImplementedException();
     }
 }
