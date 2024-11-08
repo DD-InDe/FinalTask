@@ -3661,11 +3661,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\alena\\RiderProjects\\Projects_ForFinal\\Final_Training\\Web\\Web.csproj",
+      "projectUniqueName": "C:\\Users\\alena\\RiderProjects\\Projects_ForFinal\\FinalTask\\Web\\Web.csproj",
       "projectName": "Web",
-      "projectPath": "C:\\Users\\alena\\RiderProjects\\Projects_ForFinal\\Final_Training\\Web\\Web.csproj",
+      "projectPath": "C:\\Users\\alena\\RiderProjects\\Projects_ForFinal\\FinalTask\\Web\\Web.csproj",
       "packagesPath": "C:\\Users\\alena\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\alena\\RiderProjects\\Projects_ForFinal\\Final_Training\\Web\\obj\\",
+      "outputPath": "C:\\Users\\alena\\RiderProjects\\Projects_ForFinal\\FinalTask\\Web\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -3687,8 +3687,8 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "C:\\Users\\alena\\RiderProjects\\Projects_ForFinal\\Final_Training\\Database\\Database.csproj": {
-              "projectPath": "C:\\Users\\alena\\RiderProjects\\Projects_ForFinal\\Final_Training\\Database\\Database.csproj"
+            "C:\\Users\\alena\\RiderProjects\\Projects_ForFinal\\FinalTask\\Database\\Database.csproj": {
+              "projectPath": "C:\\Users\\alena\\RiderProjects\\Projects_ForFinal\\FinalTask\\Database\\Database.csproj"
             }
           }
         }

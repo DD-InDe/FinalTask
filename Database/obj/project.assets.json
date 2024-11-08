@@ -5001,11 +5001,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\alena\\RiderProjects\\Projects_ForFinal\\Final_Training\\Database\\Database.csproj",
+      "projectUniqueName": "C:\\Users\\alena\\RiderProjects\\Projects_ForFinal\\FinalTask\\Database\\Database.csproj",
       "projectName": "Database",
-      "projectPath": "C:\\Users\\alena\\RiderProjects\\Projects_ForFinal\\Final_Training\\Database\\Database.csproj",
+      "projectPath": "C:\\Users\\alena\\RiderProjects\\Projects_ForFinal\\FinalTask\\Database\\Database.csproj",
       "packagesPath": "C:\\Users\\alena\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\alena\\RiderProjects\\Projects_ForFinal\\Final_Training\\Database\\obj\\",
+      "outputPath": "C:\\Users\\alena\\RiderProjects\\Projects_ForFinal\\FinalTask\\Database\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

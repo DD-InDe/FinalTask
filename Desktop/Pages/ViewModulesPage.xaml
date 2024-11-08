@@ -69,7 +69,7 @@
                                                 <TextBlock.Text>
                                                     <MultiBinding StringFormat="{}{0} {1}">
                                                         <Binding Path="LastName"/>
-                                                        <Binding Path="MiddleName"/>
+                                                        <Binding Path="FirstName"/>
                                                     </MultiBinding>
                                                 </TextBlock.Text>
                                             </TextBlock>
@@ -90,7 +90,7 @@
                                                 <TextBlock.Text>
                                                     <MultiBinding StringFormat="{}{0} {1}">
                                                         <Binding Path="LastName"/>
-                                                        <Binding Path="MiddleName"/>
+                                                        <Binding Path="FirstName"/>
                                                     </MultiBinding>
                                                 </TextBlock.Text>
                                             </TextBlock>

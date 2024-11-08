@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "pcA/DD/2g9Mv7aca0CbOAPm+w2bfxMtNAoB/R8k+FkG2Bud3aFMO3bUFL8iG51sPD0tn3u2dI0CE1fj5gX9ujA==",
+  "dgSpecHash": "D/0BZkYmGxrQ4MtI9N0H01Bc5esYBxU9Vw5zkT4g7aPxKpSYx9ixEz3E9aFSKDrgO8OsgmM2ABrNqq2UnIN1yw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\alena\\RiderProjects\\Projects_ForFinal\\Final_Training\\Desktop\\Desktop.csproj",
+  "projectFilePath": "C:\\Users\\alena\\RiderProjects\\Projects_ForFinal\\FinalTask\\Desktop\\Desktop.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\alena\\.nuget\\packages\\aspose.cells\\24.10.0\\aspose.cells.24.10.0.nupkg.sha512",
     "C:\\Users\\alena\\.nuget\\packages\\aspose.words\\24.10.0\\aspose.words.24.10.0.nupkg.sha512",

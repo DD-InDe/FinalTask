@@ -1,35 +1,35 @@
 {
   "Files": [
     {
-      "Id": "C:\\Users\\alena\\RiderProjects\\Projects_ForFinal\\Final_Training\\Web\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\Web.bundle.scp.css",
+      "Id": "C:\\Users\\alena\\RiderProjects\\Projects_ForFinal\\FinalTask\\Web\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\Web.bundle.scp.css",
       "PackagePath": "staticwebassets\\Web.bundle.scp.css"
     },
     {
-      "Id": "C:\\Users\\alena\\RiderProjects\\Projects_ForFinal\\Final_Training\\Web\\wwwroot\\app.css",
+      "Id": "C:\\Users\\alena\\RiderProjects\\Projects_ForFinal\\FinalTask\\Web\\wwwroot\\app.css",
       "PackagePath": "staticwebassets\\app.css"
     },
     {
-      "Id": "C:\\Users\\alena\\RiderProjects\\Projects_ForFinal\\Final_Training\\Web\\wwwroot\\bootstrap\\bootstrap.min.css",
+      "Id": "C:\\Users\\alena\\RiderProjects\\Projects_ForFinal\\FinalTask\\Web\\wwwroot\\bootstrap\\bootstrap.min.css",
       "PackagePath": "staticwebassets\\bootstrap\\bootstrap.min.css"
     },
     {
-      "Id": "C:\\Users\\alena\\RiderProjects\\Projects_ForFinal\\Final_Training\\Web\\wwwroot\\bootstrap\\bootstrap.min.css.map",
+      "Id": "C:\\Users\\alena\\RiderProjects\\Projects_ForFinal\\FinalTask\\Web\\wwwroot\\bootstrap\\bootstrap.min.css.map",
       "PackagePath": "staticwebassets\\bootstrap\\bootstrap.min.css.map"
     },
     {
-      "Id": "C:\\Users\\alena\\RiderProjects\\Projects_ForFinal\\Final_Training\\Web\\wwwroot\\favicon.png",
+      "Id": "C:\\Users\\alena\\RiderProjects\\Projects_ForFinal\\FinalTask\\Web\\wwwroot\\favicon.png",
       "PackagePath": "staticwebassets\\favicon.png"
     },
     {
-      "Id": "C:\\Users\\alena\\RiderProjects\\Projects_ForFinal\\Final_Training\\Web\\wwwroot\\scripts\\createFile.js",
+      "Id": "C:\\Users\\alena\\RiderProjects\\Projects_ForFinal\\FinalTask\\Web\\wwwroot\\scripts\\createFile.js",
       "PackagePath": "staticwebassets\\scripts\\createFile.js"
     },
     {
-      "Id": "C:\\Users\\alena\\RiderProjects\\Projects_ForFinal\\Final_Training\\Web\\wwwroot\\scripts\\notificationByAlert.js",
+      "Id": "C:\\Users\\alena\\RiderProjects\\Projects_ForFinal\\FinalTask\\Web\\wwwroot\\scripts\\notificationByAlert.js",
       "PackagePath": "staticwebassets\\scripts\\notificationByAlert.js"
     },
     {
-      "Id": "C:\\Users\\alena\\RiderProjects\\Projects_ForFinal\\Final_Training\\Web\\wwwroot\\scripts\\notificationWindow.js",
+      "Id": "C:\\Users\\alena\\RiderProjects\\Projects_ForFinal\\FinalTask\\Web\\wwwroot\\scripts\\notificationWindow.js",
       "PackagePath": "staticwebassets\\scripts\\notificationWindow.js"
     },
     {

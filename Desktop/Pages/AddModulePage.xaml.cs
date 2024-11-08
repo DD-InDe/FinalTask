@@ -1,3 +1,4 @@
+using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
 using Database.Models;
@@ -10,20 +11,26 @@ namespace Desktop.Pages;
 public partial class AddModulePage : Page
 {
     private List<Employee> _allEmployees = new();
-    private List<Employee> _selectedDevelopers = new();
-    private List<Employee> _selectedAccessors = new();
 
     private Module _module = new Module()
     {
         DateCreate = DateTime.Now,
-        StatusId = 1
+        StatusId = 1,
+        ModuleDevelopDeadline = 0
     };
 
     public AddModulePage()
     {
         InitializeComponent();
+        DataContext = _module;
     }
 
+    /// <summary>
+    /// Метод обрабатывающий собтие загрузки страницы.
+    /// Используется для загрузки данных с сервера на страницу
+    /// </summary>
+    /// <param name="sender">Элемент, вызывающий событие</param>
+    /// <param name="e">Событие</param>
     private async void AddModulePage_OnLoaded(object sender, RoutedEventArgs e)
     {
         try
@@ -39,14 +46,66 @@ public partial class AddModulePage : Page
         }
     }
 
-    private void DevelopersComboBox_OnItemSelectionChanged(object sender, ItemSelectionChangedEventArgs e)
+    /// <summary>
+    /// Метод обрабатывающий событие нажатие кнопки.
+    /// Используется для сохранения данных
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    private async void SaveButton_OnClick(object sender, RoutedEventArgs e)
     {
         try
         {
-            _selectedDevelopers = DevelopersComboBox.SelectedItems as List<Employee>;
-            AccessorsComboBox.ItemsSource = _allEmployees
-                .Where(c => !_selectedDevelopers.Contains(c))
-                .ToList();
+            string daysText = DeadlineTextBox.Text;
+            int days = 0;
+            bool isOk = int.TryParse(daysText, out days);
+            if (!isOk)
+            {
+                MessageService.ShowInfo("Неверный формат в поле \"Срок разработки\"");
+                return;
+            }
+
+            if (days > 0 && !String.IsNullOrEmpty(_module.CodeName)
+                         && DevelopersComboBox.SelectedItems.Count != 0
+                         && AccessorsComboBox.SelectedItems.Count != 0
+                         && MainAccessorsComboBox.SelectedItem != null)
+            {
+                List<object> developers = ((ObservableCollection<object>)DevelopersComboBox.SelectedItems).ToList();
+                List<object> accessors = ((ObservableCollection<object>)AccessorsComboBox.SelectedItems).ToList();
+                Employee mainAccessor = MainAccessorsComboBox.SelectedItem as Employee ?? default!;
+                List<Collaboration> collaborations = new List<Collaboration>();
+
+                foreach (var developer in developers)
+                {
+                    collaborations.Add(new()
+                    {
+                        EmployeeId = ((Employee)developer).Id,
+                        RoleId = 1,
+                        IsAccepted = false,
+                        IsMain = false,
+                        Module = _module
+                    });
+                }
+
+                foreach (var accessor in accessors)
+                {
+                    collaborations.Add(new()
+                    {
+                        EmployeeId = ((Employee)accessor).Id,
+                        RoleId = 2,
+                        IsAccepted = false,
+                        IsMain = accessor == mainAccessor,
+                        Module = _module
+                    });
+                }
+
+                bool isSuccess = await AdaptationManageService.AddModuleAndCollaborations(collaborations);
+                MessageService.ShowOk(isSuccess.ToString());
+            }
+            else
+            {
+                MessageService.ShowInfo("Все поля обязательны для заполнения. Срок разработки должен быть больше 0.");
+            }
         }
         catch (Exception exception)
         {
@@ -55,27 +114,6 @@ public partial class AddModulePage : Page
         }
     }
 
-    private void AccessorsComboBox_OnItemSelectionChanged(object sender, ItemSelectionChangedEventArgs e)
-    {
-        try
-        {
-        }
-        catch (Exception exception)
-        {
-            Console.WriteLine(exception);
-            MessageService.ShowError(exception);
-        }
-    }
-
-    private void SaveButton_OnClick(object sender, RoutedEventArgs e)
-    {
-        try
-        {
-        }
-        catch (Exception exception)
-        {
-            Console.WriteLine(exception);
-            MessageService.ShowError(exception);
-        }
-    }
+    private void AccessorsComboBox_OnItemSelectionChanged(object sender, ItemSelectionChangedEventArgs e) =>
+        MainAccessorsComboBox.ItemsSource = AccessorsComboBox.SelectedItems;
 }

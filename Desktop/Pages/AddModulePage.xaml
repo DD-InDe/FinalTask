@@ -28,21 +28,26 @@
             <TextBlock Text="Разработчики:"
                        Style="{StaticResource Main-Text}" />
             <kit:CheckComboBox x:Name="DevelopersComboBox"
-                               ItemSelectionChanged="DevelopersComboBox_OnItemSelectionChanged"
-                      Style="{StaticResource Main-CheckComboBox}" />
-            
+                               DisplayMemberPath="FullName"
+                               Style="{StaticResource Main-CheckComboBox}" />
+
             <TextBlock Text="Согласованты:"
                        Style="{StaticResource Main-Text}" />
             <kit:CheckComboBox x:Name="AccessorsComboBox"
+                               DisplayMemberPath="FullName"
                                ItemSelectionChanged="AccessorsComboBox_OnItemSelectionChanged"
-                               Style="{StaticResource Main-CheckComboBox}" />
-            
+                               Style="{StaticResource Main-CheckComboBox}"/>
+
             <TextBlock Text="Главный согласовант:"
                        Style="{StaticResource Main-Text}" />
             <ComboBox x:Name="MainAccessorsComboBox"
-                               Style="{StaticResource Main-ComboBox}" />
-            
-            <Button x:Name="SaveButton" Click="SaveButton_OnClick" Style="{StaticResource Main-Button}" Content="Сохранить"/>
+                      DisplayMemberPath="FullName"
+                      Style="{StaticResource Main-ComboBox}" />
+
+            <Button x:Name="SaveButton"
+                    Click="SaveButton_OnClick"
+                    Style="{StaticResource Main-Button}"
+                    Content="Сохранить" />
         </StackPanel>
     </Border>
 </Page>

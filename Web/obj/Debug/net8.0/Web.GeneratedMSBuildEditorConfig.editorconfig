@@ -9,51 +9,51 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = Web
 build_property.RootNamespace = Web
-build_property.ProjectDir = C:\Users\alena\RiderProjects\Projects_ForFinal\Final_Training\Web\
+build_property.ProjectDir = C:\Users\alena\RiderProjects\Projects_ForFinal\FinalTask\Web\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.RazorLangVersion = 8.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\Users\alena\RiderProjects\Projects_ForFinal\Final_Training\Web
+build_property.MSBuildProjectDirectory = C:\Users\alena\RiderProjects\Projects_ForFinal\FinalTask\Web
 build_property._RazorSourceGeneratorDebug = 
 
-[C:/Users/alena/RiderProjects/Projects_ForFinal/Final_Training/Web/Components/App.razor]
+[C:/Users/alena/RiderProjects/Projects_ForFinal/FinalTask/Web/Components/App.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xBcHAucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/alena/RiderProjects/Projects_ForFinal/Final_Training/Web/Components/Modules/ModulesAccepting.razor]
+[C:/Users/alena/RiderProjects/Projects_ForFinal/FinalTask/Web/Components/Modules/ModulesAccepting.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xNb2R1bGVzXE1vZHVsZXNBY2NlcHRpbmcucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/alena/RiderProjects/Projects_ForFinal/Final_Training/Web/Components/Modules/ViewModules.razor]
+[C:/Users/alena/RiderProjects/Projects_ForFinal/FinalTask/Web/Components/Modules/ViewModules.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xNb2R1bGVzXFZpZXdNb2R1bGVzLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/alena/RiderProjects/Projects_ForFinal/Final_Training/Web/Components/Pages/Authorization.razor]
+[C:/Users/alena/RiderProjects/Projects_ForFinal/FinalTask/Web/Components/Pages/Authorization.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xBdXRob3JpemF0aW9uLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/alena/RiderProjects/Projects_ForFinal/Final_Training/Web/Components/Pages/ModuleManagement.razor]
+[C:/Users/alena/RiderProjects/Projects_ForFinal/FinalTask/Web/Components/Pages/ModuleManagement.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xNb2R1bGVNYW5hZ2VtZW50LnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/alena/RiderProjects/Projects_ForFinal/Final_Training/Web/Components/Pages/PersonalArea.razor]
+[C:/Users/alena/RiderProjects/Projects_ForFinal/FinalTask/Web/Components/Pages/PersonalArea.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xQZXJzb25hbEFyZWEucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/alena/RiderProjects/Projects_ForFinal/Final_Training/Web/Components/Pages/ViewModuleInfo.razor]
+[C:/Users/alena/RiderProjects/Projects_ForFinal/FinalTask/Web/Components/Pages/ViewModuleInfo.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xWaWV3TW9kdWxlSW5mby5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/alena/RiderProjects/Projects_ForFinal/Final_Training/Web/Components/Routes.razor]
+[C:/Users/alena/RiderProjects/Projects_ForFinal/FinalTask/Web/Components/Routes.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xSb3V0ZXMucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/alena/RiderProjects/Projects_ForFinal/Final_Training/Web/Components/_Imports.razor]
+[C:/Users/alena/RiderProjects/Projects_ForFinal/FinalTask/Web/Components/_Imports.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xfSW1wb3J0cy5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/alena/RiderProjects/Projects_ForFinal/Final_Training/Web/Components/Layout/MainLayout.razor]
+[C:/Users/alena/RiderProjects/Projects_ForFinal/FinalTask/Web/Components/Layout/MainLayout.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xMYXlvdXRcTWFpbkxheW91dC5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = b-739djkm78g
