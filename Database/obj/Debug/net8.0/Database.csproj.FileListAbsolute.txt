@@ -12,3 +12,4 @@ C:\Users\alena\RiderProjects\Projects_ForFinal\Final_Training\Database\obj\Debug
 C:\Users\alena\RiderProjects\Projects_ForFinal\Final_Training\Database\obj\Debug\net8.0\Database.pdb
 C:\Users\alena\RiderProjects\Projects_ForFinal\Final_Training\Database\obj\Debug\net8.0\Database.genruntimeconfig.cache
 C:\Users\alena\RiderProjects\Projects_ForFinal\Final_Training\Database\obj\Debug\net8.0\ref\Database.dll
+C:\Users\alena\RiderProjects\Projects_ForFinal\Final_Training\Database\obj\Debug\net8.0\Database.sourcelink.json

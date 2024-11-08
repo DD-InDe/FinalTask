@@ -37,26 +37,38 @@ public partial class ViewModulesPage : Page
     {
         try
         {
-            List<ModulePositions> modulePositionsList = new();
+            List<ModuleDetailInfo> moduleDetailInfos = new();
             List<Module> modules = await FormationAdaptionProgramService.GetModulesList() ?? new();
+            List<Collaboration> collaborations = await FormationAdaptionProgramService.GetCollaborations() ?? new();
 
             foreach (var module in modules)
             {
                 List<Position> positions =
                     await FormationAdaptionProgramService.GetPositionsIncludedInModule(module.Id) ?? new();
-                ModulePositions modulePositions = new ModulePositions()
+                List<Employee> developers = collaborations.Where(c => c.ModuleId == module.Id && c.RoleId == 1)
+                    .ToList()
+                    .Select(c => c.Employee)
+                    .ToList();
+                List<Employee> accessors = collaborations.Where(c => c.ModuleId == module.Id && c.RoleId == 2)
+                    .ToList()
+                    .Select(c => c.Employee)
+                    .ToList();
+
+                ModuleDetailInfo moduleDetailInfo = new ModuleDetailInfo()
                 {
                     Module = module,
-                    Positions = positions
+                    Positions = positions,
+                    Developers = developers,
+                    Accessors = accessors
                 };
-                modulePositionsList.Add(modulePositions);
+                moduleDetailInfos.Add(moduleDetailInfo);
             }
 
             if (_position != 0)
-                modulePositionsList = modulePositionsList.Where(c => c.Positions.Any(p => p.Id == _position))
+                moduleDetailInfos = moduleDetailInfos.Where(c => c.Positions.Any(p => p.Id == _position))
                     .ToList();
 
-            ModulesDataGrid.ItemsSource = modulePositionsList;
+            ModulesDataGrid.ItemsSource = moduleDetailInfos;
         }
         catch (Exception exception)
         {

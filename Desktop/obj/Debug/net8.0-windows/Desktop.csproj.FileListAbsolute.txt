@@ -102,3 +102,4 @@ C:\Users\alena\RiderProjects\Projects_ForFinal\Final_Training\Desktop\obj\Debug\
 C:\Users\alena\RiderProjects\Projects_ForFinal\Final_Training\Desktop\obj\Debug\net8.0-windows\Pages\ViewModulesPage.baml
 C:\Users\alena\RiderProjects\Projects_ForFinal\Final_Training\Desktop\obj\Debug\net8.0-windows\Pages\AddModulePage.g.cs
 C:\Users\alena\RiderProjects\Projects_ForFinal\Final_Training\Desktop\obj\Debug\net8.0-windows\Pages\AddModulePage.baml
+C:\Users\alena\RiderProjects\Projects_ForFinal\Final_Training\Desktop\obj\Debug\net8.0-windows\Desktop.sourcelink.json

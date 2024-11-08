@@ -3,6 +3,7 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:kit="http://schemas.xceed.com/wpf/xaml/toolkit"
       xmlns:local="clr-namespace:Desktop.Pages"
       mc:Ignorable="d"
       Loaded="AddModulePage_OnLoaded"
@@ -14,10 +15,34 @@
         <StackPanel Orientation="Vertical">
             <TextBlock Text="Кодовое название:"
                        Style="{StaticResource Main-Text}" />
+            <TextBox x:Name="CodeNameTextBox"
+                     Style="{StaticResource Main-TextBox}"
+                     Text="{Binding CodeName}" />
+
             <TextBlock Text="Срок разработки:"
                        Style="{StaticResource Main-Text}" />
-            <TextBlock Text="Разработчики и согласованты:"
+            <TextBox x:Name="DeadlineTextBox"
+                     Style="{StaticResource Main-TextBox}"
+                     Text="{Binding ModuleDevelopDeadline}" />
+
+            <TextBlock Text="Разработчики:"
                        Style="{StaticResource Main-Text}" />
+            <kit:CheckComboBox x:Name="DevelopersComboBox"
+                               ItemSelectionChanged="DevelopersComboBox_OnItemSelectionChanged"
+                      Style="{StaticResource Main-CheckComboBox}" />
+            
+            <TextBlock Text="Согласованты:"
+                       Style="{StaticResource Main-Text}" />
+            <kit:CheckComboBox x:Name="AccessorsComboBox"
+                               ItemSelectionChanged="AccessorsComboBox_OnItemSelectionChanged"
+                               Style="{StaticResource Main-CheckComboBox}" />
+            
+            <TextBlock Text="Главный согласовант:"
+                       Style="{StaticResource Main-Text}" />
+            <ComboBox x:Name="MainAccessorsComboBox"
+                               Style="{StaticResource Main-ComboBox}" />
+            
+            <Button x:Name="SaveButton" Click="SaveButton_OnClick" Style="{StaticResource Main-Button}" Content="Сохранить"/>
         </StackPanel>
     </Border>
 </Page>
