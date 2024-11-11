@@ -34,4 +34,19 @@ public abstract class AdaptationManageService : ApiBase
             throw;
         }
     }
+
+    public static async Task<bool> AddAdaptationProgram(List<AdaptationProgramModule> adaptationProgramModules)
+    {
+        try
+        {
+            var message = await Client.PostAsJsonAsync(BaseUrl + "api/AdaptationManage/AdaptationPrograms",
+                adaptationProgramModules);
+            return message.IsSuccessStatusCode;
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
+    }
 }

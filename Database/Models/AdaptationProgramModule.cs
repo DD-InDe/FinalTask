@@ -14,6 +14,10 @@ public partial class AdaptationProgramModule
 
     public int? MentorId { get; set; }
 
+    public bool? IsComplete { get; set; }
+
+    public bool? IsOpen { get; set; }
+
     public virtual AdaptationProgram? AdaptationProgram { get; set; }
 
     public virtual Employee? Mentor { get; set; }

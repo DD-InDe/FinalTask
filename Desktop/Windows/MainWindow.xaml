@@ -46,6 +46,6 @@
                Grid.Row="1"
                Navigated="MainFrame_OnNavigated"
                NavigationUIVisibility="Hidden"
-               Source="../Pages/MainMenuPage.xaml" />
+               Source="../Pages/LoginPage.xaml" />
     </Grid>
 </Window>

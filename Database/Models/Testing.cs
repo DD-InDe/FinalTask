@@ -16,5 +16,7 @@ public partial class Testing
 
     [JsonIgnore] public virtual ICollection<TestQuestion> TestQuestions { get; set; } = new List<TestQuestion>();
 
+    [JsonIgnore] public virtual ICollection<TestingResult> TestingResults { get; set; } = new List<TestingResult>();
+
     public virtual TestingType? Type { get; set; }
 }

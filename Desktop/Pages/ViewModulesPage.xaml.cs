@@ -45,11 +45,13 @@ public partial class ViewModulesPage : Page
             {
                 List<Position> positions =
                     await FormationAdaptionProgramService.GetPositionsIncludedInModule(module.Id) ?? new();
-                List<Employee> developers = collaborations.Where(c => c.ModuleId == module.Id && c.RoleId == 1)
+                List<Employee> developers = collaborations
+                    .Where(c => c.ModuleId == module.Id && c.RoleId == 1)
                     .ToList()
                     .Select(c => c.Employee)
                     .ToList();
-                List<Employee> accessors = collaborations.Where(c => c.ModuleId == module.Id && c.RoleId == 2)
+                List<Employee> accessors = collaborations
+                    .Where(c => c.ModuleId == module.Id && c.RoleId == 2)
                     .ToList()
                     .Select(c => c.Employee)
                     .ToList();
@@ -65,7 +67,8 @@ public partial class ViewModulesPage : Page
             }
 
             if (_position != 0)
-                moduleDetailInfos = moduleDetailInfos.Where(c => c.Positions.Any(p => p.Id == _position))
+                moduleDetailInfos = moduleDetailInfos
+                    .Where(c => c.Positions.Any(p => p.Id == _position))
                     .ToList();
 
             ModulesDataGrid.ItemsSource = moduleDetailInfos;

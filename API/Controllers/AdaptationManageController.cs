@@ -36,8 +36,32 @@ public class AdaptationManageController(EmployeeAdaptationSystemDbContext contex
         {
             return Ok(await context
                 .ModuleAccesses.Where(c => c.PositionId == positionId)
+                .Include(c => c.Module)
+                .Include(c => c.Module.ResponsiblePerson)
                 .Select(c => c.Module)
                 .ToListAsync());
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            return Conflict(e);
+        }
+    }
+
+    [HttpPost("AdaptationPrograms")]
+    public async Task<IActionResult> AddAdaptationProgram(
+        [FromBody] List<AdaptationProgramModule> adaptationProgramModules)
+    {
+        try
+        {
+            AdaptationProgram program = adaptationProgramModules.First()
+                .AdaptationProgram;
+            await context.AdaptationPrograms.AddAsync(program);
+            adaptationProgramModules.ForEach(c => c.AdaptationProgram = program);
+            await context.AdaptationProgramModules.AddRangeAsync(adaptationProgramModules);
+            await context.SaveChangesAsync();
+
+            return Ok();
         }
         catch (Exception e)
         {

@@ -16,6 +16,8 @@ public partial class AdaptationProgram
 
     public int? PositionId { get; set; }
 
+    public bool? IsPassed { get; set; }
+
     [JsonIgnore] public virtual ICollection<AdaptationProgramModule> AdaptationProgramModules { get; set; } = new List<AdaptationProgramModule>();
 
     public virtual Department? Department { get; set; }

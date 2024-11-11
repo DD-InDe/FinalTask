@@ -9,6 +9,28 @@
       Title="Конструктор"
       d:DesignHeight="450"
       d:DesignWidth="800">
+
+    <Page.Resources>
+        <ToolTip x:Key="ModuleToolTip">
+            <ToolTip.Content>
+                <StackPanel Orientation="Vertical">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Кодовое название:" />
+                        <TextBlock Text="{Binding CodeName}" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Срок прохождения модуля:" />
+                        <TextBlock Text="{Binding ModuleCompleteDeadline}" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Ответственное лицо:" />
+                        <TextBlock Text="{Binding ResponsiblePerson.FullName}" />
+                    </StackPanel>
+                </StackPanel>
+            </ToolTip.Content>
+        </ToolTip>
+    </Page.Resources>
+
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
@@ -57,7 +79,18 @@
                 <ItemsControl x:Name="ModuleItems">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <ToggleButton Style="{StaticResource Main-ToggleButton}" Content="{Binding Name}"/>
+                            <StackPanel Orientation="Horizontal">
+                                <ToggleButton Style="{StaticResource Main-ToggleButton}"
+                                              ToolTip="{StaticResource ModuleToolTip}"
+                                              HorizontalAlignment="Stretch"
+                                              IsChecked="{Binding IsSelected}"
+                                              Content="{Binding Module.Name}" />
+                                <ComboBox x:Name="EmployeeComboBox"
+                                          DisplayMemberPath="FullName"
+                                          ItemsSource="{Binding Employees}"
+                                          SelectedItem="{Binding Employee}"
+                                          Style="{StaticResource Main-ComboBox}" />
+                            </StackPanel>
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>

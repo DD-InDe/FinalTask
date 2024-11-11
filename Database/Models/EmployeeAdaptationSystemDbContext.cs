@@ -52,6 +52,8 @@ public partial class EmployeeAdaptationSystemDbContext : DbContext
 
     public virtual DbSet<Testing> Testings { get; set; }
 
+    public virtual DbSet<TestingResult> TestingResults { get; set; }
+
     public virtual DbSet<TestingType> TestingTypes { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -89,7 +91,8 @@ public partial class EmployeeAdaptationSystemDbContext : DbContext
 
             entity.HasOne(d => d.AdaptationProgram).WithMany(p => p.AdaptationProgramModules)
                 .HasForeignKey(d => d.AdaptationProgramId)
-                .HasConstraintName("FK__Adaptatio__Adapt__619B8048");
+                .OnDelete(DeleteBehavior.Cascade)
+                .HasConstraintName("fk_AdaptationProgram");
 
             entity.HasOne(d => d.Mentor).WithMany(p => p.AdaptationProgramModules)
                 .HasForeignKey(d => d.MentorId)
@@ -332,6 +335,17 @@ public partial class EmployeeAdaptationSystemDbContext : DbContext
             entity.HasOne(d => d.Type).WithMany(p => p.Testings)
                 .HasForeignKey(d => d.TypeId)
                 .HasConstraintName("FK__Testing__TypeId__4BAC3F29");
+        });
+
+        modelBuilder.Entity<TestingResult>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK__TestingR__3214EC07F8C0FB15");
+
+            entity.ToTable("TestingResult");
+
+            entity.HasOne(d => d.Testing).WithMany(p => p.TestingResults)
+                .HasForeignKey(d => d.TestingId)
+                .HasConstraintName("FK__TestingRe__Testi__66603565");
         });
 
         modelBuilder.Entity<TestingType>(entity =>
