@@ -30,6 +30,8 @@ public partial class Employee
 
     public virtual Department? Department { get; set; }
 
+    [JsonIgnore] public virtual ICollection<DownloadHistory> DownloadHistories { get; set; } = new List<DownloadHistory>();
+
     [JsonIgnore] public virtual ICollection<EmployeeQuestionResult> EmployeeQuestionResults { get; set; } = new List<EmployeeQuestionResult>();
 
     [JsonIgnore] public virtual ICollection<ModuleEditHistory> ModuleEditHistories { get; set; } = new List<ModuleEditHistory>();
@@ -39,4 +41,6 @@ public partial class Employee
     [JsonIgnore] public virtual ICollection<Notification> Notifications { get; set; } = new List<Notification>();
 
     public virtual Position? Position { get; set; }
+
+    [JsonIgnore] public virtual ICollection<TestingResult> TestingResults { get; set; } = new List<TestingResult>();
 }

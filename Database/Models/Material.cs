@@ -16,5 +16,7 @@ public partial class Material
 
     public string? FileName { get; set; }
 
+    [JsonIgnore] public virtual ICollection<DownloadHistory> DownloadHistories { get; set; } = new List<DownloadHistory>();
+
     public virtual Module? Module { get; set; }
 }

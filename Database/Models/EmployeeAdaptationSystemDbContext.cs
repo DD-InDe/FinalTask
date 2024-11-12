@@ -24,6 +24,8 @@ public partial class EmployeeAdaptationSystemDbContext : DbContext
 
     public virtual DbSet<Department> Departments { get; set; }
 
+    public virtual DbSet<DownloadHistory> DownloadHistories { get; set; }
+
     public virtual DbSet<Employee> Employees { get; set; }
 
     public virtual DbSet<EmployeeQuestionResult> EmployeeQuestionResults { get; set; }
@@ -129,6 +131,21 @@ public partial class EmployeeAdaptationSystemDbContext : DbContext
             entity.ToTable("Department");
 
             entity.Property(e => e.Name).HasMaxLength(200);
+        });
+
+        modelBuilder.Entity<DownloadHistory>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK__Download__3214EC07D5546C85");
+
+            entity.ToTable("DownloadHistory");
+
+            entity.HasOne(d => d.Employee).WithMany(p => p.DownloadHistories)
+                .HasForeignKey(d => d.EmployeeId)
+                .HasConstraintName("FK__DownloadH__Emplo__6C190EBB");
+
+            entity.HasOne(d => d.Material).WithMany(p => p.DownloadHistories)
+                .HasForeignKey(d => d.MaterialId)
+                .HasConstraintName("FK__DownloadH__Mater__6B24EA82");
         });
 
         modelBuilder.Entity<Employee>(entity =>
@@ -342,6 +359,10 @@ public partial class EmployeeAdaptationSystemDbContext : DbContext
             entity.HasKey(e => e.Id).HasName("PK__TestingR__3214EC07F8C0FB15");
 
             entity.ToTable("TestingResult");
+
+            entity.HasOne(d => d.Employee).WithMany(p => p.TestingResults)
+                .HasForeignKey(d => d.EmployeeId)
+                .HasConstraintName("TestingResult___fk");
 
             entity.HasOne(d => d.Testing).WithMany(p => p.TestingResults)
                 .HasForeignKey(d => d.TestingId)
